@@ -1,0 +1,127 @@
+{% load static %}
+<html class="js">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>PaperBook – Learning Redefine</title>
+    <!-- <link rel="stylesheet" id="fontawesome-css" href="{% static 'css/font-awesome.min.css' %}" type="text/css"
+        media="all"> -->
+    <script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/jquery/jquery-migrate.min.js"></script>
+    <script type="text/javascript">
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        function uuidv4() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+        let device = getCookie('device')
+        if (device == null || device == undefined) {
+            device = uuidv4()
+        }
+        document.cookie = 'device=' + device + ";domain=;path=/"
+    </script>
+</head>
+
+<body data-gr-c-s-loaded="true">
+    <div class="main-navigation-container is-nav-sticky is-slicknav  double-navigation nav-down">
+        <!-- left menu -->
+        <nav class="main-navigation-menu navigation-left">
+            <ul class="is-slicknav-navigation-left">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/bookshelf">Bookshelf</a>
+                </li>
+                <li class=" menu-item-has-children ">
+                    <a href="#">Publications</a>
+                    <ul class="sub-menu">
+                        <li><a href="/bookshelf/?publication=Alok+Publication" class="">Alok Publication</a></li>
+                        <li><a href="/bookshelf/?publication=BK+Publication" class="">BK Publication</a></li>
+                        <li><a href="/bookshelf/?publication=EM+Publication" class="">EM Publication</a></li>
+                        <li><a href="/bookshelf/?publication=Khanna+Publication" class="">KHANNA Publication</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- end left menu -->
+        <!-- logo -->
+        <div class="navigation-logo is-slicknav-logo">
+            <a href="/">
+                <img src="{% static 'img/logo.png' %}" alt="">
+            </a>
+        </div>
+        <!-- end logo -->
+        <!-- right menu -->
+        <nav class="main-navigation-menu navigation-right">
+            <ul class="is-slicknav-navigation-right">
+                <li class="menu-item ">
+                    <a href="/blog">Blog</a>
+                </li>
+                <li class="menu-item ">
+                    <a href="/contact-us">Contact-us</a>
+                </li>
+                {% if not user.is_authenticated %}
+                <!-- if not logged in -->
+                <li class="menu-item-has-children ">
+                    <a href="#" class=""><span class="">Login/signup</span></a>
+                    <ul class="sub-menu">
+                        <li><a href="/accounts/login" class="">Login</a></li>
+                        <li>
+                            <a href="/register" class="">Signup</a>
+                        </li>
+                    </ul>
+                </li>
+                {% else %}
+                <li class="menu-item-has-children">
+                    <a href="#" class=""><i class="fas fa-user-graduate"></i> <span class="">{{user.first_name}}
+                            {{user.last_name}}</span></a>
+                    <ul class="sub-menu">
+                        <li><a href="/MyAccount" class="">My Account</a></li>
+                        <li>
+                            <a href="/logout" class="">Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+                {%endif%}
+            </ul>
+        </nav>
+        <!-- end right menu -->
+    </div>
+    <div class="is-nav-offset" style="padding-top: 98px;"></div>
+    <script type="text/javascript" src="{% static 'js/ResizeSensor.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquerypp.custom.js' %}"></script>
+    <script type="text/javascript">
+            (function () {
+                var request, b = document.body,
+                    c = 'className',
+                    cs = 'customize-support',
+                    rcs = new RegExp('(^|\\s+)(no-)?' + cs + '(\\s+|$)');?
+                request = true;
+                b[c] = b[c].replace(rcs, ' ');
+                // The customizer requires postMessage and CORS (if the site is cross domain).
+                b[c] += (window.postMessage && request ? ' ' : ' no-') + cs;
+            }());
+    </script>
+    <!--<![endif]-->
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Footer</title>
+    <!-- css -->
+    <link rel="stylesheet" id="ssd-mailchimp-css-css" href="{% static 'css/subscribe-main.css' %}" type="text/css"
+        media="all">
+    <!-- css end -->
+    <script src="https://kit.fontawesome.com/d94382b958.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- footer -->
+    <footer class="footer section-light has-widgets" style="position: relative;">
+        <div class="overlay-color"></div>
+        <div class="overlay-pattern-2"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <!-- about us -->
+                    <div class="widget clearfix">
+                        <div class="about-me-widget-wrapper">
+                            <h4 class="widget-title">About Us</h4>
+                            <div class="about-me-widget-image">
+                                <img width="700" height="120" src="{% static 'img/logo.png' %}" alt=""> </div>
+                            <div class="about-me-widget-information">
+                                <p>PaperBooks is an online portal which will help you to surf easily and buy different
+                                    kind of books and stationary items as per your requirement. Our utmost promise to
+                                    our readers is that we will deliver the book just in "12 hours" within Bhubaneswar,
+                                    with great offers that will delight book readers. Books are an unique part to gain
+                                    knowledge and redefine your learning ability.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end about us -->
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <!-- newsletter -->
+                    <div class="widget clearfix">
+                        <div class="MailchimpNewsletter mailchimp-widget-wrapper">
+                            <h4 class="widget-title">Newsletter</h4>
+                            <div class="mailchimp-newsletter-content-wrapper">
+                                <div class="mailchimp-newsletter-content mb-20">Make sure you don't miss anything!</div>
+                                <form action="{% url 'core:footer' %}" method="POST"
+                                    class="is-mailchimp-shortcode-subscribe">
+                                    {% csrf_token %}
+                                    <fieldset>
+                                        <input type="email" class="is-mailchimp-email" name="email"
+                                            placeholder="Your e-mail address" value="">
+                                        <button class="btn btn-icon is-signup-button"
+                                            type="submit"><span>Subscribe</span></button>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end newsletter -->
+                    <!-- social links -->
+                    <div class="widget clearfix widget_odrin_social"">
+                        <div class=" social-widget-wrapper">
+                        <h4 class="widget-title">Follow Us</h4>
+                        <div class="SocialLinks">
+                            <a href="https://www.facebook.com/Paperbooksin-105891120975943/" class="facebook-f"
+                                target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/paperbooks.in/" class="instagram" target="_blank"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/paper-books-4a42621b2" class="linkedin"
+                                target="_blank"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://twitter.com/Paperbooks6?s=09" class="twitter" target="_blank"><i
+                                    class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end social links -->
+            </div>
+            <div class="clear"></div>
+            <div class="col-sm-12">
+                <!-- copyright -->
+                <div class="copyright font-subheading">
+                    <p><em><strong><a href="/privacy-policy" style="color: #00ccb8;"> Privacy Policy </a> | 2020 ©
+                                Paperbooks.in | </strong></em><em> Design &amp; developed by</em>
+                        "<strong><em><a href="/AMIGOS" style="color: #00ccb8;">Amigos</a> </em></strong>"</p>
+                </div>
+                <!-- end copyright -->
+            </div>
+        </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+</body>
+
+</html>

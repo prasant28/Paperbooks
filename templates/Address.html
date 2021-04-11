@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% load cart_template_tag %}
+{% load static %}
+{% block head %}
+
+<title>Address - Paperbooks</title>
+
+<head>
+	<link rel="stylesheet" href="{% static 'css/master.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'css/ecommerce-layout.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/ecommerce-smallscreen.css' %}" type="text/css"
+		media="only screen and (max-width: 768px)">
+	<link rel="stylesheet" href="{% static 'ecommerce.css' %}" type="text/css" media="all">
+	<script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/jquery/jquery-migrate.min.js"></script>
+	<link rel="canonical" href="https://paperbooks.in/my-account/">
+	<link rel="stylesheet" id="odrin_fonts-css"
+		href="https://fonts.googleapis.com/css?family=Muli:200,300,regular,500,600,700,800,900,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic%7CCinzel+Decorative:regular,700,900%7CGentium+Basic:regular,italic,700,700italic&amp;subset=cyrillic,cyrillic-ext"
+		type="text/css" media="all">
+	<style type="text/css">
+		body {
+			font-family: Muli;
+			font-style: normal;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		.fw-table .heading-row,
+		.fw-package .fw-heading-row,
+		.special-first-letter>p:first-of-type:first-letter,
+		.special-heading-letter:first-letter,
+		.ecommerce .price del,
+		.ecommerce .price>span,
+		.font-heading {
+			font-family: Cinzel Decorative;
+			font-style: normal;
+		}
+	</style>
+</head>
+{% endblock head %}
+{% block content %}
+
+<body class="ecommerce-account">
+	<div style="padding-top:50px;"></div>
+	<!-- cart -->
+	<a class="cart-contents-box" href="/cart" title="View your shopping cart">
+		<i class="fa fa-shopping-basket"></i>Cart<span id="cart-contents-count">
+			({{request.user|cart_item_count}})</span>
+	</a>
+	<!-- end cart -->
+	<div class="MAIN-CONTENT">
+		<!-- page heading -->
+		<div class="PageHeader container text-center">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="SpecialHeading">
+						<h1 class="special-title special-heading-letter">My account</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end page heading -->
+		<div class="container mt-100 mb-100">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="ecommerce">
+						<!-- side nav -->
+						<nav class="ecommerce-MyAccount-navigation">
+							<ul>
+								<li class="ecommerce-MyAccount-navigation-link">
+									<a href="/MyAccount">Dashboard</a>
+								</li>
+								<li class="ecommerce-MyAccount-navigation-link">
+									<a href="/Orders">Orders</a>
+								</li>
+								<li class="ecommerce-MyAccount-navigation-link is-active">
+									<a href="/Address">Addresses</a>
+								</li>
+								<li class="ecommerce-MyAccount-navigation-link">
+									<a href="/AccountDetails">Account details</a>
+								</li>
+								<li class="ecommerce-MyAccount-navigation-link">
+									<a href="/logout">Logout</a>
+								</li>
+							</ul>
+						</nav>
+						<!-- end side nav -->
+						<div class="ecommerce-MyAccount-content">
+							<div class="ecommerce-notices-wrapper"></div>
+							<p>The following addresses will be used on the checkout page by default.</p>
+							<div class="ecommerce-Addresses col2-set addresses">
+								<div class="col-1 ecommerce-Address">
+									<header class="ecommerce-Address-title title">
+										<h3>Billing address</h3>
+										<a href="#" class="shipping-calculator-button">Add</a>
+										<section class="shipping-calculator-form" style="display: none;">
+											<p>
+												Rohan
+											</p>
+										</section>
+
+									</header>
+									<address>You have not set up this type of address yet.</address>
+								</div>
+								<div class="col-2 ecommerce-Address">
+									<header class="ecommerce-Address-title title">
+										<h3>Shipping address</h3>
+										<a href="#" class="shipping-calculator-button1">Add</a>
+										<section class="shipping-calculator-form1" style="display: none;">
+											<p>
+												Rohan
+											</p>
+										</section>
+									</header>
+									<address>You have not set up this type of address yet.</address>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var wc_cart_params = { "ajax_url": "\/wordpress\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/wordpress\/?wc-ajax=%%endpoint%%", "update_shipping_method_nonce": "f8b3e89967", "apply_coupon_nonce": "851eb0b738", "remove_coupon_nonce": "574b205acc" };
+/* ]]> */
+	</script>
+	<script type="text/javascript" src="{% static 'js/toggle.js' %}"></script>
+</body>
+{% endblock content %}

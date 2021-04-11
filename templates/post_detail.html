@@ -1,0 +1,314 @@
+{% extends "base.html" %}
+{% load social_share %}
+{% load static %}
+{% block head %}
+
+<head>
+    <title>{{post.post_title}} – Paperbooks</title>
+    <link rel="stylesheet" href="https://paperbooks.in/wp-content/themes/odrin/assets/css/font-awesome.min.css"
+        type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'css/master.css' %}" type="text/css" media="all">
+    <script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/jquery/jquery-migrate.min.js"></script>
+    <link rel="stylesheet" id="sharedaddy-css" href="{% static 'css/sharing.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" id="social-logos-css"
+        href="https://c0.wp.com/p/jetpack/8.6.1/_inc/social-logos/social-logos.min.css" type="text/css" media="all">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" id="odrin_fonts-css"
+        href="https://fonts.googleapis.com/css?family=Muli:200,300,regular,500,600,700,800,900,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic%7CCinzel+Decorative:regular,700,900%7CGentium+Basic:regular,italic,700,700italic&amp;subset=cyrillic,cyrillic-ext"
+        type="text/css" media="all">
+    <style type="text/css">
+        body {
+            font-family: Muli;
+            font-style: normal;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .fw-table .heading-row,
+        .fw-package .fw-heading-row,
+        .special-first-letter>p:first-of-type:first-letter,
+        .special-heading-letter:first-letter,
+        .ecommerce .price del,
+        .ecommerce .price>span,
+        .font-heading {
+            font-family: Cinzel Decorative;
+            font-style: normal;
+        }
+
+        p {
+            align-items: justify;
+        }
+    </style>
+</head>
+{% endblock head %}
+{% block content %}
+
+<body>
+    <div class=" MAIN-CONTENT">
+        <div class="SinglePostHeader text-center mb-100">
+            <div class="bg-image is-parallax" data-bg-image="/img/{{post.post_image}}?resize=2000%2C1100&amp;ssl=1"
+                style="background-image: url(&quot;/img/{{post.post_image}}&quot;); background-position: left 50% top 79.52%;">
+            </div>
+            <div class="overlay-dark"></div>
+            <div class="container mt-40 mb-40">
+                <div class="row">
+                    <div class="col-sm-12 section-light">
+                        <span class="single-post-meta-date">{{post.post_date}}</span>
+                        <div class="SpecialHeading mt-60 mb-60">
+                            <h1 class="special-title special-heading-letter mb-20">{{post.post_title}}</h1>
+                        </div>
+                        <div class="special-subtitle">
+                            <span class="single-post-meta-categories"><a href="https://paperbooks.in/category/books/"
+                                    rel="category tag">{{post.post_category}}</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <article
+            class="SinglePost post-422 post type-post status-publish format-standard has-post-thumbnail hentry category-books"
+            id="post-422">
+            <div class="container mb-80">
+
+                <div class="SinglePostContent row mb-40">
+
+                    <div class="col-md-8 col-md-offset-0 col-sm-12 col-sm-offset-0">
+                        <!-- post -->
+                        <div class="single-post-content-inner mb-60">
+                            <p>{{post.post_desc|safe}}</p><br>
+                            <!-- like -->
+                            <a href="{% url 'core:like_post' post.pk %}"><i class="far fa-thumbs-up"
+                                    style="font-size: 20px;">Like</i> {{ post.likes.count }}</a>
+                            <!-- end like -->
+                            <!-- share -->
+                            <div class="sharedaddy sd-sharing-enabled">
+                                <div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing">
+                                    <h3 class="sd-title">Share this:</h3>
+                                    <div class="sd-content">
+                                        <ul>
+                                            <li>
+                                                {% post_to_facebook object_or_url %}
+                                            </li>
+                                            <li>
+                                                {% post_to_twitter "{{object.title}}. Check it out!" object_or_url "Post to Twitter" %}
+                                            </li>
+                                            <li>
+                                                {% post_to_whatsapp object_or_url "Share via WhatsApp" %}
+                                            </li>
+                                            <li>
+                                                {% post_to_linkedin object_or_url %}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end share -->
+                        </div>
+                        <!-- end post -->
+                        <div class="SinglePostFooter text-center mb-100">
+                        </div>
+                        <!-- prev nxt post -->
+                        <div class="SimplifiedPosts AdjacentPosts is-matchheight-group text-center pos-r mb-60">
+                            {% if post.get_next_by_post_date %}
+                            <div class="simplified-post-wrapper next-post mb-40" style="height: 398px;">
+                                <a href="{% url 'core:post' post.get_next_by_post_date.slug %}">
+                                    <div class="SimplifiedImage">
+                                        <div class="bg-image"
+                                            data-bg-image="/img/{{post.get_next_by_post_date.post_image}}"
+                                            style="background-image: url(&quot;/img/{{post.get_next_by_post_date.post_image}}&quot;);">
+                                        </div>
+                                    </div>
+                                    <div class="simplified-post-meta">
+                                        <div class="ElementHeading">
+                                            <h4 class="element-title">{{post.get_next_by_post_date}}</h4>
+                                        </div>
+                                        <div class="simplified-post-date">
+                                            <span>{{post.get_next_by_post_date.post_date}}</span></div>
+                                        <div class="simplified-post-text special-subtitle-type-2">previous Post</div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% if post.get_previous_by_post_date %}
+                            <div class="simplified-post-wrapper prev-post mb-40" style="height: 398px;">
+                                <a href="{% url 'core:post' post.get_previous_by_post_date.slug %}">
+                                    <div class="SimplifiedImage">
+                                        <div class="bg-image"
+                                            data-bg-image="/img/{{post.get_previous_by_post_date.post_image}}"
+                                            style="background-image: url(&quot;/img/{{post.get_previous_by_post_date.post_image}}&quot;);">
+                                        </div>
+                                    </div>
+                                    <div class="simplified-post-meta">
+                                        <div class="ElementHeading">
+                                            <h4 class="element-title">{{post.get_previous_by_post_date}}</h4>
+                                        </div>
+                                        <div class="simplified-post-date">
+                                            <span>{{post.get_previous_by_post_date.post_date}}</span></div>
+                                        <div class="simplified-post-text special-subtitle-type-2">next Post</div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <!-- end prev nxt post -->
+                        <!-- comment -->
+                        <div class="SinglePostComments mb-60">
+                            <div class="CommentsArea " id="comments">
+                                {% if not post.comments.all %}
+                                {%else%}
+                                <div class="commentslist-container">
+                                    <h2 id="comments">Recent Comments ({{post.comments.count}})</h2>
+                                    <ul class="commentlist">
+                                        {% for comment in post.comments.all %}
+                                        <li class="comment even thread-even depth-1" id="{{comment.pk}}">
+                                            <article class="comment-content">
+                                                <div class="">
+                                                    <div class="comment-left">
+                                                        <figure class="comment-avatar">
+                                                            <img alt=""
+                                                                src="http://0.gravatar.com/avatar/fd08fa6ed9b0ab4be03354a65ab55d87?s=50&amp;d=mm&amp;r=g"
+                                                                srcset="http://0.gravatar.com/avatar/fd08fa6ed9b0ab4be03354a65ab55d87?s=100&amp;d=mm&amp;r=g 2x"
+                                                                class="avatar media-object avatar-50 photo" height="50"
+                                                                width="50" style="border-radius: 30px;"> </figure>
+                                                    </div>
+                                                    <div class="comment-body">
+                                                        <header class="comment-header">
+                                                            <h5 class="comment-author">{{comment.name}}</h5>
+                                                            <span class="comment-meta"><a
+                                                                    href="">{{comment.timestamp}}</a> ·</span>
+                                                        </header>
+                                                        <div class="comment-main-content">
+                                                            <p>{{comment.content}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                            {%if comment.rep%}
+                                            <ul class="children" style="padding-left: 80px; margin-top: -15px;">
+                                                <li class="comment byuser comment-author-paperbooks bypostauthor odd alt depth-2"
+                                                    id="{{comment.pk}}">
+                                                    <article class="comment-content">
+                                                        <div class="">
+                                                            <div class="comment-left">
+                                                                <figure class="comment-avatar">
+                                                                    <img alt="paperbooks" src="/static/img/icon.png"
+                                                                        class="avatar media-object avatar-50 photo "
+                                                                        height="50" width="50"></figure>
+                                                            </div>
+                                                            <div class="comment-body">
+                                                                <header class="comment-header">
+                                                                    <h5 class="comment-author">paperbooks</h5>
+                                                                </header>
+                                                                <div class="comment-main-content">
+                                                                    <p>{{comment.rep}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </article>
+                                                </li>
+                                            </ul>
+                                            {%endif%}
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% endif %}
+                                <div id="respond" class="comment-respond">
+                                    <h3 id="reply-title" class="comment-reply-title">Leave a Comment
+                                    </h3>
+                                    <form action="" method="POST" class="comment-form">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="comment-form-comment col-sm-12 col-md-12">
+                                                <div class="field-textarea"><label
+                                                        for="comment">Comment<sup>*</sup></label>
+                                                    {{form.content}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="comment-form-author col-sm-12 col-md-4">
+                                                <div class="field-text"><label for="author">
+                                                        Name<sup>*</sup></label>
+                                                    {{form.name}}
+                                                </div>
+                                            </div>
+                                            <div class="comment-form-email col-sm-12 col-md-4">
+                                                <div class="field-text"><label for="email">Email
+                                                        <sup>*</sup></label>
+                                                    {{form.email}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="form-submit"><input name="submit" type="submit" id="submit"
+                                                class="submit" value="Post Comment">
+                                        </p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end comment -->
+                    </div>
+                    <!-- sidebar -->
+                    <div
+                        class="SidebarMain col-lg-3 col-lg-offset-1 col-md-4 col-md-offset-0 col-sm-12 col-sm-offset-0">
+                        <div id="ecommerce_product_search-2" class="widget clearfix ecommerce widget_product_search">
+                            <form role="search" method="get" class="ecommerce-product-search" action="/blog">
+                                <label class="screen-reader-text" for="ecommerce-product-search-field-0">Search
+                                    for:</label>
+                                <input type="search" id="ecommerce-product-search-field-0" class="search-field"
+                                    placeholder="Search blogs…" value="" name="s_p">
+                                <button type="submit" value="Search">Search</button>
+                            </form>
+                        </div>
+                        <div id="tag_cloud-2" class="widget clearfix widget_tag_cloud">
+                            <h3 class="widget-title dash-left">Books Categories</h3>
+                            <div class="tagcloud"><a
+                                    href="http://subsolardesigns.com/odrin/demo1/product-category/adventure/"
+                                    class="tag-cloud-link tag-link-18 tag-link-position-1" style="font-size: 22pt;"
+                                    aria-label="Adventure (7 items)">Adventure</a>
+                                <a href="http://subsolardesigns.com/odrin/demo1/product-category/mistery/"
+                                    class="tag-cloud-link tag-link-23 tag-link-position-2" style="font-size: 8pt;"
+                                    aria-label="Mistery (3 items)">Mistery</a>
+                                <a href="http://subsolardesigns.com/odrin/demo1/product-category/romance/"
+                                    class="tag-cloud-link tag-link-22 tag-link-position-3" style="font-size: 16.4pt;"
+                                    aria-label="Romance (5 items)">Romance</a>
+                                <a href="http://subsolardesigns.com/odrin/demo1/product-category/young-adult/"
+                                    class="tag-cloud-link tag-link-17 tag-link-position-4"
+                                    style="font-size: 12.666666666667pt;" aria-label="Young Adult (4 items)">Young
+                                    Adult</a>
+                            </div>
+                        </div>
+                        <div id="popular_posts-2" class="widget clearfix widget_popular_posts">
+                            <h3 class="widget-title dash-left">Popular Posts </h3>
+                            {% for post in pop %}
+                            <article
+                                class="post-422 post type-post status-publish format-standard has-post-thumbnail hentry category-books">
+                                <a href="{{post.get_absolute_url}}">
+                                    <div class="WidgetPostContent">
+                                        <div class="bg-image" data-bg-image="/img/{{post.post_image}}"
+                                            style="background-image: url(&quot;/img/{{post.post_image}}&quot;);">
+                                        </div>
+                                        <div class="overlay-dark"></div>
+                                        <div class="popular-posts-header">
+                                            <h4 class="popular-posts-title">{{post.post_title}}</h4>
+                                            <p class="popular-posts-meta-extra font-subheading">{{post.post_date}}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </article>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- end sidebar -->
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+{% endblock content %}

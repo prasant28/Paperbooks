@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load cart_template_tag %}
+{% load static %}
+{% block head %}
+
+<head>
+	<title>Contact Us – PaperBook</title>
+	<link rel="stylesheet" id="fontawesome-css" href="{% static 'css/font-awesome.min.css' %}" type="text/css"
+		media="all">
+	<link rel="stylesheet" id="bookblock-css" href="{% static 'css/bookblock.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" id="odrin_master-css-css" href="{% static 'css/master.css' %}" type="text/css" media="all">
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" id="odrin_fonts-css"
+		href="https://fonts.googleapis.com/css?family=Muli:200,300,regular,500,600,700,800,900,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic%7CCinzel+Decorative:regular,700,900%7CGentium+Basic:regular,italic,700,700italic&amp;subset=cyrillic,cyrillic-ext"
+		type="text/css" media="all">
+	<style type="text/css">
+		body {
+			font-family: Muli;
+			font-style: normal;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		.fw-table .heading-row,
+		.fw-package .fw-heading-row,
+		.special-first-letter>p:first-of-type:first-letter,
+		.special-heading-letter:first-letter,
+		.ecommerce .price del,
+		.ecommerce .price>span,
+		.font-heading {
+			font-family: Cinzel Decorative;
+			font-style: normal;
+		}
+
+		label {
+			font-family: Gentium Book Basic;
+			font-style: normal;
+		}
+
+		td {
+			padding: 10px 10px !important;
+		}
+
+		.icent {
+			text-align: center !important;
+		}
+	</style>
+</head>
+{% endblock head %}
+{% block content %}
+
+<body data-gr-c-s-loaded="true">
+	<!-- cart -->
+	<a class="cart-contents-box" href="/cart" title="View your shopping cart">
+		<i class="fa fa-shopping-basket"></i>Cart<span id="cart-contents-count">
+			({{request.user|cart_item_count}})</span>
+	</a>
+	<!-- end cart -->
+	<div class="MAIN-CONTENT">
+		<div>
+			<div class="TemplateContact">
+				<div class="container">
+					<div class="contact-form-section mt-100 mb-80">
+						<div class="row">
+							<div class="col-sm-12 col-md-7 col-lg-6">
+								<div class="SpecialHeading mb-60">
+									<h1 class="special-title special-heading-letter mb-20">Contact Us</h1>
+									<img src="{% static 'img/12123.svg' %}" alt="12123" class=" hidden-xs">
+									<!--contact details -->
+									<table>
+										<tr>
+											<h3 class="special-subtitle" style="font-size: 25px;">Find Us Here</h3>
+										</tr>
+										<tr>
+											<td class="icent"><i class="material-icons"
+													style="font-size: 40px;">&#xe0c8;</i></td>
+											<td>
+												<h6 style="text-transform: lowercase;">Kalinga Vihar, Bhubaneshwar,
+													odisha, 751019</h6>
+											</td>
+										</tr>
+										<tr>
+											<td class="icent"><i class="material-icons"
+													style="font-size: 40px;">&#xe158;</i></td>
+											<td>
+												<h6 style="text-transform: lowercase;">Support@paperbooks.in</h6>
+											</td>
+										</tr>
+										<tr>
+											<td class="icent"><i class="fas fa-phone-alt" style="font-size: 30px;"> </i>
+											</td>
+											<td>
+												<h6>7063646256, 7381560785</h6>
+											</td>
+										</tr>
+									</table>
+									<!-- end contact details -->
+								</div>
+							</div>
+							<!-- contact form -->
+							<div class="col-sm-12 col-md-5 col-lg-6 mt-100">
+								<div class="contact-form-section-cf7">
+									<div role="form" class="wpcf7" dir="ltr">
+										<div class="screen-reader-response" aria-live="polite"></div>
+										<form action="" method="POST" class="wpcf7-form" novalidate="novalidate">
+											{% csrf_token %}
+											<p>
+												<label>
+													Your Name <span class="error">*</span><br />
+												</label>
+												{{form.your_name}}
+											</p>
+											<p>
+												<label>
+													Your Email <span class="error">*</span><br />
+												</label>
+												{{form.your_email}}
+											</p>
+											<p>
+												<label> Subject<br /> </label>
+												{{form.your_subject}}
+											</p>
+											<p>
+												<label>
+													Your Message <span class="error">*</span><br />
+												</label>
+												{{form.your_message}}
+											</p>
+											<p>
+												<input type="submit" value="Send"
+													class="wpcf7-form-control wpcf7-submit" /><span
+													class="ajax-loader"></span>
+											</p>
+										</form>
+									</div>
+								</div>
+							</div>
+							<!-- end contact form -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+{% endblock content %}

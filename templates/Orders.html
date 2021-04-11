@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load cart_template_tag %}
+{% load static %}
+{% block head %}
+
+<head>
+	<title>Orders – Paperbooks</title>
+	<link rel="stylesheet" href="{% static 'css/master.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'css/ecommerce-layout.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/ecommerce-smallscreen.css' %}" type="text/css"
+		media="only screen and (max-width: 768px)">
+	<link rel="stylesheet" href="{% static 'css/ecommerce.css' %}" type="text/css" media="all">
+	<script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/jquery/jquery-migrate.min.js"></script>
+	<link rel="canonical" href="https://paperbooks.in/my-account/">
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var odrin = {
+			"ajaxurl": "http:\/\/subsolardesigns.com\/odrin\/demo1\/wp-admin\/admin-ajax.php",
+			"nonce": "6b3daa77e4",
+			"month": "Month",
+			"months": "Months",
+			"day": "Day",
+			"days": "Days",
+			"showChapters": "Show Chapters",
+			"hideChapters": "Hide Chapters",
+			"loading": "Loading"
+		};
+            /* ]]> */
+	</script>
+	<!-- end -->
+	<link rel="stylesheet" href="{% static 'css/bookblock.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/master.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/ecommerce.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" id="odrin_fonts-css"
+		href="https://fonts.googleapis.com/css?family=Muli:200,300,regular,500,600,700,800,900,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic%7CCinzel+Decorative:regular,700,900%7CGentium+Basic:regular,italic,700,700italic&amp;subset=cyrillic,cyrillic-ext"
+		type="text/css" media="all">
+	<style type="text/css">
+		body {
+			font-family: Muli;
+			font-style: normal;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		.fw-table .heading-row,
+		.fw-package .fw-heading-row,
+		.special-first-letter>p:first-of-type:first-letter,
+		.special-heading-letter:first-letter,
+		.ecommerce .price del,
+		.ecommerce .price>span,
+		.font-heading {
+			font-family: Cinzel Decorative;
+			font-style: normal;
+		}
+	</style>
+</head>
+{% endblock head %}
+{% block content %}
+
+<body class="ecommerce-account">
+	<div style="padding-top:50px;"></div>
+	<!-- cart -->
+	<a class="cart-contents-box" href="/cart" title="View your shopping cart">
+		<i class="fa fa-shopping-basket"></i>Cart<span id="cart-contents-count">
+			({{request.user|cart_item_count}})</span>
+	</a>
+	<!-- end cart -->
+	<div class="MAIN-CONTENT">
+		<!-- page heading -->
+		<div class="PageHeader container text-center">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="SpecialHeading">
+						<h1 class="special-title special-heading-letter">My account</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end page heading -->
+		<div class="container mt-100 mb-100">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="ecommerce">
+						<!-- side nav -->
+						<nav class="ecommerce-MyAccount-navigation">
+							<ul>
+								<li class="ecommerce-MyAccount-navigation-link">
+									<a href="/MyAccount">Dashboard</a>
+								</li>
+								<li class="ecommerce-MyAccount-navigation-link is-active">
+									<a href="/Orders">Orders</a>
+								</li>
+								<li class="ecommerce-MyAccount-navigation-link">
+									<a href="/Address">Addresses</a>
+								</li>
+								<li class="ecommerce-MyAccount-navigation-link">
+									<a href="/AccountDetails">Account details</a>
+								</li>
+								<li class="ecommerce-MyAccount-navigation-link">
+									<a href="/logout">Logout</a>
+								</li>
+							</ul>
+						</nav>
+						<!-- end side nav -->
+						<!-- orders -->
+						<div class="ecommerce-MyAccount-content">
+							<div class="ecommerce-notices-wrapper"></div>
+							<div
+								class="ecommerce-message ecommerce-message--info ecommerce-Message ecommerce-Message--info ecommerce-info">
+								<a class="ecommerce-Button button" href="/bookshelf">
+									Browse products </a>No order has been made yet.
+							</div>
+						</div>
+						<!-- end orders -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+{% endblock content %}

@@ -1,0 +1,429 @@
+{% extends "base.html" %}
+{% load cart_template_tag %}
+{% load social_share %}
+{% load static %}
+{% block head %}
+<title>{{book.book_nm}} – PaperBook</title>
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/ecommerce-layout.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'css/ecommerce-smallscreen.css' %}" type="text/css"
+        media="only screen and (max-width: 768px)">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'css/bookblock.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'css/sharing.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'css/ecommerce.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'css/master.css' %}" type="text/css">
+
+    <link rel="stylesheet" id="odrin_fonts-css"
+        href="https://fonts.googleapis.com/css?family=Muli:200,300,regular,500,600,700,800,900,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic%7CCinzel+Decorative:regular,700,900%7CGentium+Basic:regular,italic,700,700italic&amp;subset=cyrillic,cyrillic-ext"
+        type="text/css" media="all">
+    <style type="text/css">
+        body {
+            font-family: Muli;
+            font-style: normal;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .fw-table .heading-row,
+        .fw-package .fw-heading-row,
+        .special-first-letter>p:first-of-type:first-letter,
+        .special-heading-letter:first-letter,
+        .ecommerce .price del,
+        .ecommerce .price>span,
+        .font-heading {
+            font-family: Cinzel Decorative;
+            font-style: normal;
+        }
+
+        div.stars {
+            width: 300px;
+            display: inline-block;
+        }
+
+        input.star {
+            display: none;
+        }
+
+        label.star {
+            float: right;
+            font-size: 22px;
+            color: #00ccb8;
+            transition: all .2s;
+        }
+
+        input.star:checked~label.star:before {
+            content: '\f005';
+            color: #2b3990;
+            transition: all .25s;
+        }
+
+        input.star-5:checked~label.star:before {
+            color: #2b3990;
+            text-shadow: 0 0 20px #4353b8;
+        }
+
+        input.star-1:checked~label.star:before {
+            color: #2b3990;
+        }
+
+        label.star:hover {
+            transform: rotate(-15deg) scale(1.3);
+        }
+
+        label.star:before {
+            content: '\f006';
+            font-family: FontAwesome;
+        }
+
+        i.star {
+            content: '\f005';
+            color: #2b3990;
+        }
+
+        i.empty-star {
+            content: '\f006';
+            color: #00ccb8;
+        }
+    </style>
+</head>
+{% endblock head %}
+{% block content %}
+
+<body class="ecommerce" data-gr-c-s-loaded="true">
+    <!-- cart -->
+    <a class="cart-contents-box" href="/cart" title="View your shopping cart">
+        <i class="fa fa-shopping-basket"></i>Cart<span id="cart-contents-count">
+            ({{request.user|cart_item_count}})</span>
+    </a>
+    <!-- end cart -->
+    <div class="MAIN-CONTENT">
+        <div class="container mt-100">
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- breadcrumb -->
+                    <nav class="ecommerce-breadcrumb">
+                        <a href="/">Home</a>&nbsp;/&nbsp;
+                        <a href="/bookshelf/?publication={{book.publisher_nm}}">{{book.publisher_nm}}</a>&nbsp;/&nbsp;
+                        {{book.book_nm}}
+                    </nav>
+                    <!-- end breadcrumb -->
+                    <div class="ecommerce-notices-wrapper"></div>
+                    <!-- book -->
+                    <div class="product ">
+                        <div class="SingleProductHeader mb-100">
+                            <div class="ecommerce-product-gallery ecommerce-product-gallery--with-images ecommerce-product-gallery--columns-4 images"
+                                data-columns="4" style="opacity: 1; transition: opacity 0.25s ease-in-out 0s;">
+                                <div class="ecommerce-product-gallery__image-wrapper SingleProductImage">
+                                    <div data-thumb="/../img/{{book.book_image}}"
+                                        class="ecommerce-product-gallery__image">
+                                        <img width="376" height="500" src="/../img/{{book.book_image}}">
+                                    </div>
+                                    <div class="single-product-price">
+                                        <span class="price-text font-heading">
+                                            <span class="ecommerce-Price-amount amount">
+                                                <span
+                                                    class="ecommerce-Price-currencySymbol">₹</span>{{book.book_price}}</span></span>
+                                    </div>
+                                </div>
+                                <div class="ecommerce-product-gallery__thumbnails_wrapper is-lightbox-gallery"></div>
+                            </div>
+                            <div class="single-product-summary">
+                                <div class="SpecialHeading mb-60">
+                                    <h1 class="product_title special-title special-heading-letter entry-title">
+                                        {{book.book_nm}}</h1>
+                                </div>
+                                {% if not book.reviews.all %}
+                                {% else %}
+                                <div class="woocommerce-product-rating">
+                                    <div class="stars"
+                                        style="vertical-align: middle; float: left; width: auto; padding-right: 10px;">
+                                        <i
+                                            class="fa fa-star {% if book.get_average_rating < 1 %}empty-{% endif %}star"></i>
+                                        <i
+                                            class="fa fa-star {% if book.get_average_rating < 2 %}empty-{% endif %}star"></i>
+                                        <i
+                                            class="fa fa-star {% if book.get_average_rating < 3 %}empty-{% endif %}star"></i>
+                                        <i
+                                            class="fa fa-star {% if book.get_average_rating < 4 %}empty-{% endif %}star"></i>
+                                        <i
+                                            class="fa fa-star {% if book.get_average_rating < 5 %}empty-{% endif %}star"></i>
+
+                                    </div>
+                                    <a href="#reviews" class="woocommerce-review-link" rel="nofollow"> (<span
+                                            class="count">{{book.reviews.count}}</span> customer
+                                        review)
+                                    </a>
+                                </div>
+                                {% endif %}
+                                <div class="ecommerce-product-details__short-description mb-60">
+                                    <p><strong>Author</strong> : {{book.author_nm}}</p>
+                                </div>
+                                {% if book.stock == 0 %}
+                                <p class="stock in-stock">Out of stock</p>
+                                {% elif book.stock == 1 %}
+                                <p class="stock in-stock">Only 1 left in stock</p><br>
+                                <a href="{{book.get_add_to_cart_url}}" type="submit" name="add-to-cart"
+                                    class="single_add_to_cart_button btn alt">Add to cart</a>
+                                <a href="{{book.get_buy_now_url}}" type="submit" name="add-to-cart" class="btn alt"
+                                    style="margin-left: 10px;">Buy
+                                    Now</a>
+                                {% else %}
+                                <p class="stock in-stock" style="
+                                border-left: 5px solid green;">In stock</p><br>
+                                <a href="{{book.get_add_to_cart_url}}" type="submit" name="add-to-cart"
+                                    class="single_add_to_cart_button btn alt" style="margin-bottom: 10px;">Add to
+                                    cart</a>
+                                <a href="{{book.get_buy_now_url}}" type="submit" name="add-to-cart" class="btn alt"
+                                    style="margin-bottom: 10px; margin-left:10px ;">Buy
+                                    Now</a>
+                                {% endif %}
+                                <!-- share -->
+                                <div class="sharedaddy">
+                                    <h3 class="sd-title">Share this:</h3>
+                                    <div class="sd-content">
+                                        <ul>
+                                            <li>
+                                                {% post_to_facebook object_or_url %}
+                                            </li>
+                                            <li>
+                                                {% post_to_twitter "{{object.title}}. Check it out!" object_or_url "Post to Twitter" %}
+                                            </li>
+                                            <li>
+                                                {% post_to_whatsapp object_or_url "Share via WhatsApp" %}
+                                            </li>
+                                            <li>
+                                                {% post_to_linkedin object_or_url %}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- end share -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7 col-sm-12 mb-80">
+                                <div class="SingleProductInfoBox">
+                                    <!-- description -->
+                                    <div class="info-box-panel">
+                                        <div class="ElementHeading">
+                                            <h2 class="element-title">Description</h2>
+                                        </div>
+                                        <p><strong>Contents</strong></p>
+                                        <p>{{book.book_desc|safe}}</p>
+                                    </div>
+                                    <!-- end description -->
+                                    <!-- additional details -->
+                                    <div class="info-box-panel">
+                                        <div class="ElementHeading">
+                                            <h2 class="element-title">Additional information</h2>
+                                        </div>
+
+                                        <table class="shop_attributes">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Publication</th>
+                                                    <td>
+                                                        <p>{{book.publisher_nm}}</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Branch</th>
+                                                    <td>
+                                                        <p>{{book.branch}}</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Edition</th>
+                                                    <td>
+                                                        <p>{{book.edition}}</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- end additional details -->
+                                </div>
+                                <div id="reviews" class="ecommerce-Reviews">
+                                    <!-- rating -->
+                                    <div id="comments">
+                                        <div class="ElementHeading">
+                                            <h2 class="element-title">Reviews</h2>
+                                        </div>
+                                        {% if not book.reviews.all %}
+                                        <p class="ecommerce-noreviews">There are no reviews yet.</p>
+                                        {%else%}
+                                        {% for rev in book.reviews.all %}
+                                        <ol class="commentlist">
+                                            <li class="review ">
+                                                <div id="comment-13" class="comment_container">
+                                                    <img alt="" src="/static/img/guest.png"
+                                                        class="avatar media-object avatar-50 photo" height="50"
+                                                        width="50" style="border-radius: 30px;">
+                                                    <div class="comment-text">
+                                                        <div class="stars"
+                                                            style="vertical-align: middle; float: right; width: auto;">
+                                                            <i
+                                                                class="fa fa-star {% if rev.rate < 1 %}empty-{% endif %}star"></i>
+                                                            <i
+                                                                class="fa fa-star {% if rev.rate < 2 %}empty-{% endif %}star"></i>
+                                                            <i
+                                                                class="fa fa-star {% if rev.rate < 3 %}empty-{% endif %}star"></i>
+                                                            <i
+                                                                class="fa fa-star {% if rev.rate < 4 %}empty-{% endif %}star"></i>
+                                                            <i
+                                                                class="fa fa-star {% if rev.rate < 5 %}empty-{% endif %}star"></i>
+
+                                                        </div>
+                                                        <h5>{{rev.user}}</h5>
+                                                        <p class="meta"></p>
+                                                        <time
+                                                            class="woocommerce-review__published-date">{{rev.timestamp}}</time>
+                                                        </p>
+                                                        <div class="description">
+                                                            <p>{{rev.review}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    <!-- end rating -->
+                                    <!-- review  -->
+                                    <div id="review_form_wrapper">
+                                        <div id="review_form">
+                                            <div id="respond" class="comment-respond">
+                                                <div class="ElementHeading">
+                                                    <h2 class="element-title"><span id="reply-title"
+                                                            class="comment-reply-title">Add a review</span></h2>
+                                                </div>
+                                                {% if request.user.is_authenticated %}
+                                                <form action="" method="POST" id="commentform" class="comment-form">
+                                                    {% csrf_token %}
+                                                    <div class="comment-form-rating" style="padding-bottom: 10px;">
+                                                        <label for="rating">Your
+                                                            rating :</label>
+                                                        <div class="stars" style="vertical-align: middle;">
+                                                            <input class="star star-5" id="star-5" type="radio"
+                                                                name="rate" value="5" />
+                                                            <label class="star star-5" for="star-5"></label>
+                                                            <input class="star star-4" id="star-4" type="radio"
+                                                                name="rate" value="4" />
+                                                            <label class="star star-4" for="star-4"></label>
+                                                            <input class="star star-3" id="star-3" type="radio"
+                                                                name="rate" value="3" />
+                                                            <label class="star star-3" for="star-3"></label>
+                                                            <input class="star star-2" id="star-2" type="radio"
+                                                                name="rate" value="2" />
+                                                            <label class="star star-2" for="star-2"></label>
+                                                            <input class="star star-1" id="star-1" type="radio"
+                                                                name="rate" value="1" />
+                                                            <label class="star star-1" for="star-1"></label>
+                                                        </div>
+
+                                                    </div>
+                                                    <p class="comment-form-comment"><label for="comment">Your review
+                                                            <span class="required">*</span></label><textarea
+                                                            name="review" cols="45" rows="8" aria-required="true"
+                                                            required=""></textarea></p>
+                                                    <p class="form-submit"><input name="submit" type="submit"
+                                                            id="submit" class="submit" value="Submit">
+                                                    </p>
+                                                </form>
+                                                {% else %}
+                                                <p class="must-log-in">You must be <a href="/accounts/login">logged
+                                                        in</a> to
+                                                    post a review.</p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end review -->
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <!-- recent books -->
+                            <div class="col-md-4 col-sm-12 col-md-offset-1 mb-80">
+                                <h4 style="text-align: center; margin-bottom: 50px;"><strong>Recent Books</strong></h4>
+                                <div class="ecommerce columns-2 ">
+                                    <ul class="products columns-4">
+                                        {% for book in book_list %}
+                                        <li class="product" style="margin-right: 8px;">
+                                            <a href="{{book.get_absolute_url}}" class="ecommerce-LoopProduct-link"
+                                                title="{{book.book_nm}}">
+                                                <div class="loopProduct-image-wrap">
+                                                    <div class="loopProduct-shadow"></div><img width="700" height="700"
+                                                        src="/../img/{{book.book_image}}" alt="{{book.book_nm}}"
+                                                        sizes="(max-width: 700px) 100vw, 700px">
+                                                </div>
+                                                <h2 class="ecommerce-loop-product__title">
+                                                    {{book.book_nm|slice:":20"}}...</h2>
+                                                <span class="price"><span class="ecommerce-Price-amount amount"><span
+                                                            class="ecommerce-Price-currencySymbol">₹</span>{{book.book_price}}</span></span>
+                                            </a>
+                                            {% if book.stock == 0 %}
+                                            <a href="{{book.get_absolute_url}}" class="special-link" rel="nofollow">View
+                                                Book</a>
+                                            {% else %}
+                                            <a href="{{book.get_add_to_cart_url}}" data-quantity="1"
+                                                class="special-link" rel="nofollow">Add to
+                                                cart</a>
+                                            {% endif %}
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- end recent books -->
+                        </div>
+                    </div>
+                    <!-- end book -->
+                    <!-- related books -->
+                    <section class="related products row">
+                        <div class="col-sm-4">
+                            <div class="BoxedTitle">
+                                <h2><i class="icon-basket"></i>Related books</h2>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+
+                            <ul class="products columns-4">
+
+                                {% for books in related %}
+                                {% if books.branch == book.branch or books.publisher_nm == book.publisher_nm %}
+                                <li class="product">
+                                    <a href="{{books.get_absolute_url}}" class="ecommerce-LoopProduct-link"
+                                        title="{{books.book_nm}}">
+                                        <div class="loopProduct-image-wrap">
+                                            <div class="loopProduct-shadow"></div><img width="700" height="700"
+                                                src="/../img/{{books.book_image}}" alt="{{books.book_nm}}"
+                                                sizes="(max-width: 700px) 100vw, 700px">
+                                        </div>
+                                        <h2 class="ecommerce-loop-product__title">{{books.book_nm|slice:":18"}}...
+                                        </h2>
+                                        <span class="price"><span class="ecommerce-Price-amount amount"><span
+                                                    class="ecommerce-Price-currencySymbol">₹</span>{{books.book_price}}</span></span>
+                                    </a><a href="{{book.get_add_to_cart_url}}" data-quantity="1" class="special-link"
+                                        rel="nofollow">Add to
+                                        cart</a>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </section>
+                    <!-- end related books -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="sp-installed"></div>
+</body>
+{% endblock content %}

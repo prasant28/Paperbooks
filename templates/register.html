@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+
+<head>
+	<title>Register - Paperbooks</title>
+	<link rel="stylesheet" id="odrin_master-css-css" href="{% static 'css/master.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" id="odrin_fonts-css"
+		href="https://fonts.googleapis.com/css?family=Muli:200,300,regular,500,600,700,800,900,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic%7CCinzel+Decorative:regular,700,900%7CGentium+Basic:regular,italic,700,700italic&amp;subset=cyrillic,cyrillic-ext"
+		type="text/css" media="all">
+	<style type="text/css">
+		body {
+			font-family: Muli;
+			font-style: normal;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		.fw-table .heading-row,
+		.fw-package .fw-heading-row,
+		.special-first-letter>p:first-of-type:first-letter,
+		.special-heading-letter:first-letter,
+		.ecommerce .price del,
+		.ecommerce .price>span,
+		.font-heading {
+			font-family: Cinzel Decorative;
+			font-style: normal;
+		}
+
+		label {
+			font-family: Gentium Book Basic;
+			font-style: normal;
+		}
+	</style>
+</head>
+{% endblock head %}
+{% block content %}
+
+<body>
+	<div>
+		<div class="container mt-100 mb-100">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="ecommerce">
+						<div class="ecommerce-notices-wrapper"></div>
+						<!-- heading -->
+						<div class="SpecialHeading ">
+							<h2 class="special-title special-heading-letter">Register</h2>
+						</div>
+						<!-- end heading -->
+						<!-- registration form -->
+						<form action="" class="ecommerce-form ecommerce-form-login" method="POST">
+							{% csrf_token %}
+							<div class="col-sm-12 col-md-6">
+								<p class="ecommerce-form-row ecommerce-form-row--wide form-row form-row-wide">
+									<label for="firstname">First name&nbsp;<span class="required error">*</span></label>
+									{{form.first_name}}
+								</p>
+								<p class="ecommerce-form-row ecommerce-form-row--wide form-row form-row-wide">
+									<label for="lastname">Last name&nbsp;<span class="required error">*</span></label>
+									{{form.last_name}}
+								</p>
+								<p class="ecommerce-form-row ecommerce-form-row--wide form-row form-row-wide">
+									<label for="email">email&nbsp;<span class="required error">*</span></label>
+									{{form.email}}
+								</p>
+								<p class="ecommerce-form-row ecommerce-form-row--wide form-row form-row-wide">
+									<label for="password">Password&nbsp;<span class="required error">*</span></label>
+									<span class="password-input"><span
+											class="show-password-input"></span>{{form.password1}}</span>
+								</p>
+								<p class="ecommerce-form-row ecommerce-form-row--wide form-row form-row-wide">
+									<label for="confirm password">Confirm Password&nbsp;<span
+											class="required error">*</span></label>
+									<span class="password-input"><span
+											class="show-password-input"></span>{{form.password2}}</span>
+								</p>
+								<p class="form-row">
+									<input type="submit" class="ecommerce-Button button" name="Register"
+										value="Register">
+								</p>
+								<p class="ecommerce-LostPassword">
+									<a href="/accounts/login">Already have account?Login</a><br>
+								</p>
+							</div>
+						</form>
+						<!-- end registration form -->
+						<!-- image -->
+						<div class="col-md-6 hidden-sm hidden-xs" style="margin-top: 50px;">
+							<img src="{% static 'img/12122.svg' %}" alt="12122">
+						</div>
+						<!-- end image -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+{% endblock content %}

@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% load social_share %}
+{% load static %}
+{% block head %}
+
+<head>
+    <title>Blog - Paperbooks</title>
+    <script src="https://kit.fontawesome.com/d94382b958.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/master.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/sharing.css' %}" type="text/css" media="all">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Muli:200,300,regular,500,600,700,800,900,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic%7CCinzel+Decorative:regular,700,900%7CGentium+Basic:regular,italic,700,700italic&amp;subset=cyrillic,cyrillic-ext"
+        type="text/css" media="all">
+    <style type="text/css">
+        body {
+            font-family: Muli;
+            font-style: normal;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .fw-table .heading-row,
+        .fw-package .fw-heading-row,
+        .special-first-letter>p:first-of-type:first-letter,
+        .special-heading-letter:first-letter,
+        .ecommerce .price del,
+        .ecommerce .price>span,
+        .font-heading {
+            font-family: Cinzel Decorative;
+            font-style: normal;
+        }
+    </style>
+</head>
+{% endblock head %}
+{% block content %}
+
+<body>
+    <div style="padding-top:50px;"></div>
+    <div class="container mt-40 mb-60">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-0 col-sm-12 col-sm-offset-0">
+                {% for post in posts %}
+                <!-- posts -->
+                <article class="Excerpt mb-20">
+                    <div class="ExcerptImage">
+                        <img width="1920" height="960" src="/img/{{post.post_image}}" alt=""
+                            srcset="/img/{{post.post_image}} 1920w"> </div>
+                    <div class="ExcerptContentWrapper pos-r">
+                        <div class="excerpt-date"><span>{{post.post_date}}</span></div>
+                        <div class="excerpt-header">
+                            <div class="ElementHeading">
+                                <a href="{{post.get_absolute_url}}">
+                                    <h2 class="element-title">{{post.post_title}}</h2>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="excerpt-content">
+                            <p style="margin: 1px;">{{post.post_desc|slice:":270"|safe}} . . . </p>
+                        </div>
+                        <div><a href="{% url 'core:like_post' post.pk %}"><i class="fas social" aria-hidden="true"></i>
+                                {{post.likes.count}} likes</a>
+                            <div class="sharedaddy">
+                                <h3 class="sd-title">Share this:</h3>
+                                <div class="sd-content">
+                                    <ul>
+                                        <li>
+                                            {% post_to_facebook object_or_url %}
+                                        </li>
+                                        <li>
+                                            {% post_to_twitter "{{object.title}}. Check it out!" object_or_url "Post to Twitter" %}
+                                        </li>
+                                        <li>
+                                            {% post_to_whatsapp object_or_url "Share via WhatsApp" %}
+                                        </li>
+                                        <li>
+                                            {% post_to_linkedin object_or_url %}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="read-more"><a href="{{post.get_absolute_url}}" class="special-subtitle-type-2">Read
+                                More</a>
+                        </div>
+                    </div>
+
+                </article>
+                <!-- end posts -->
+                {% endfor %}
+                <!-- pagination -->
+                <div class="PostNav mb-60">
+                    {% if posts.has_next %}
+                    <div class="post-nav-next special-link"><a href="?page={{posts.next_page_number}}">Next Page
+                            <i class="fa fa-long-arrow-right nav-arrow"></i></a></div>
+                    {% endif %}
+                    {% if posts.has_previous %}
+                    <div class="post-nav-prev special-link"><a href="?page={{books.previous_page_number}}"><i
+                                class="fa fa-long-arrow-left nav-arrow"></i> Previous Page</a></div>
+                    {% endif %}
+                </div>
+                <!-- end pagination -->
+            </div>
+            <!-- side nav -->
+            <div class="SidebarMain col-lg-3 col-lg-offset-1 col-md-4 col-md-offset-0 col-sm-12 col-sm-offset-0">
+                <div id="ecommerce_product_search-2" class="widget clearfix ecommerce widget_product_search">
+                    <form role="search" method="get" class="ecommerce-product-search" action="">
+                        <label class="screen-reader-text" for="ecommerce-product-search-field-0">Search
+                            for:</label>
+                        <input type="search" class="search-field" placeholder="Search blogs…" value="" name="s_p">
+                        <button type="submit" value="Search">Search</button>
+                    </form>
+                </div>
+                <form action="" method="GET">
+                    <div class="widget clearfix widget_tag_cloud">
+                        <h3 class="widget-title dash-left">Blog Categories</h3>
+                        <select name="category" style="min-width: -webkit-fill-available; appearance: auto;"
+                            onchange='this.form.submit()'>
+                            <option disabled="true" selected>Select Category</option>
+                            <option value="Education">Education</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="widget clearfix widget_popular_posts">
+                    <h3 class="widget-title  dash-left">Popular Posts </h3>
+                    {% for post in pop %}
+                    <!-- popular post -->
+                    <article>
+                        <a href="{{post.get_absolute_url}}">
+                            <div class="WidgetPostContent">
+                                <div class="bg-image" data-bg-image="/img/{{post.post_image}}"
+                                    style="background-image: url(&quot;/img/{{post.post_image}}&quot;);">
+                                </div>
+                                <div class="overlay-dark"></div>
+                                <div class="popular-posts-header">
+                                    <h4 class="popular-posts-title">{{post.post_title}}</h4>
+                                    <p class="popular-posts-meta-extra font-subheading">{{post.post_date}}</p>
+                                </div>
+                            </div> <!-- end WidgetPostContent -->
+                        </a>
+                    </article>
+                    <!-- end popular post -->
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- end side nav -->
+        </div>
+    </div>
+</body>
+{% endblock content %}

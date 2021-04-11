@@ -1,0 +1,723 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+
+<head>
+	<title>Checkout – PaperBook</title>
+	<link rel="stylesheet" href="{% static 'css/ecommerce-layout.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/ecommerce-smallscreen.css' %}" type="text/css"
+		media="only screen and (max-width: 768px)">
+	<link rel="stylesheet" href="{% static 'css/ecommerce.css' %}" type="text/css" media="all">
+	<style id="ecommerce-inline-inline-css" type="text/css">
+		.ecommerce form .form-row .required {
+			visibility: visible;
+		}
+	</style>
+	<link rel="stylesheet" href="{% static 'css/master.css' %}" type="text/css" media="all">
+	<script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/jquery/jquery-migrate.min.js"></script>
+</head>
+{% endblock head %}
+{% block content %}
+
+<body
+	class="page-template-default page page-id-118 theme-odrin user-registration-page ecommerce-checkout ecommerce-page ecommerce-js translatepress-en_US "
+	data-gr-c-s-loaded="true">
+	<div class="MAIN-CONTENT">
+		<div id="post-118" class="post-118 page type-page status-publish hentry">
+			<div class="container mt-100 mb-100">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="ecommerce">
+							<div class="ecommerce-notices-wrapper"></div>
+							<div class="ecommerce-form-login-toggle">
+
+								<!-- <div class="ecommerce-info">
+									Returning customer? <a href="#" class="showlogin">Click here to login</a> </div>
+							</div> -->
+								<!-- <form class="ecommerce-form ecommerce-form-login login" method="post" style="display:none;">
+
+
+								<p>If you have shopped with us before, please enter your details below. If you are a new
+									customer, please proceed to the Billing section.</p>
+
+								<p class="form-row form-row-first">
+									<label for="username">Username or email&nbsp;<span class="required">*</span></label>
+									<input type="text" class="input-text" name="username" id="username"
+										autocomplete="username">
+								</p>
+								<p class="form-row form-row-last">
+									<label for="password">Password&nbsp;<span class="required">*</span></label>
+									<input class="input-text" type="password" name="password" id="password"
+										autocomplete="current-password">
+								</p>
+								<div class="clear"></div>
+
+
+								<p class="form-row">
+									<label
+										class="ecommerce-form__label ecommerce-form__label-for-checkbox ecommerce-form-login__rememberme">
+										<input class="ecommerce-form__input ecommerce-form__input-checkbox"
+											name="rememberme" type="checkbox" id="rememberme" value="forever">
+										<span>Remember me</span>
+									</label>
+									<input type="hidden" id="ecommerce-login-nonce" name="ecommerce-login-nonce"
+										value="a495ce4d16"><input type="hidden" name="_wp_http_referer"
+										value="/wordpress/checkout/"> <input type="hidden" name="redirect"
+										value="http://localhost/wordpress/checkout/">
+									<button type="submit" class="ecommerce-button button ecommerce-form-login__submit"
+										name="login" value="Login">Login</button>
+								</p>
+								<p class="lost_password">
+									<a href="http://localhost/wordpress/my-account-2/lost-password/">Lost your
+										password?</a>
+								</p>
+
+								<div class="clear"></div>
+							</form> -->
+								<div class="ecommerce-form-coupon-toggle">
+
+									<div class="ecommerce-info">
+										Have a coupon? <a href="#" class="showcoupon">Click here to enter your code</a>
+									</div>
+								</div>
+
+								<form class="checkout_coupon ecommerce-form-coupon" method="post" style="display:none">
+
+									<p>If you have a coupon code, please apply it below.</p>
+
+									<p class="form-row form-row-first">
+										<input type="text" name="coupon_code" class="input-text"
+											placeholder="Coupon code" id="coupon_code" value="">
+									</p>
+
+									<p class="form-row form-row-last">
+										<button type="submit" class="button" name="apply_coupon"
+											value="Apply coupon">Apply
+											coupon</button>
+									</p>
+
+									<div class="clear"></div>
+								</form>
+								<div class="ecommerce-notices-wrapper"></div>
+
+								<div class="container mt-100 mb-100">
+									<div class="row">
+										<div class="col-sm-12">
+
+											<form name="checkout" method="post" class="checkout ecommerce-checkout"
+												action="http://localhost/wordpress/checkout/"
+												enctype="multipart/form-data" novalidate="novalidate">
+
+
+
+												<div class="col2-set" id="customer_details">
+													<div class="col-1">
+														<div class="ecommerce-billing-fields">
+
+															<div class="ElementHeading">
+																<h2 class="element-title">Billing details</h2>
+															</div>
+
+
+
+															<div class="odrin-billing-fields__field-wrapper">
+																<p class="form-row form-row-first validate-required ecommerce-validated"
+																	id="billing_first_name_field" data-priority="10">
+																	<label for="billing_first_name" class="">First
+																		name&nbsp;<abbr class="required"
+																			title="required">*</abbr></label><span
+																		class="ecommerce-input-wrapper"><input
+																			type="text" class="input-text "
+																			name="billing_first_name"
+																			id="billing_first_name" placeholder=""
+																			value="" autocomplete="given-name"></span>
+																</p>
+																<p class="form-row form-row-last validate-required ecommerce-validated"
+																	id="billing_last_name_field" data-priority="20">
+																	<label for="billing_last_name" class="">Last
+																		name&nbsp;<abbr class="required"
+																			title="required">*</abbr></label><span
+																		class="ecommerce-input-wrapper"><input
+																			type="text" class="input-text "
+																			name="billing_last_name"
+																			id="billing_last_name" placeholder=""
+																			value="" autocomplete="family-name"></span>
+																</p>
+																<!-- <p class="form-row form-row-wide"
+																	id="billing_company_field" data-priority="30"><label
+																		for="billing_company" class="">Company
+																		name&nbsp;<span
+																			class="optional">(optional)</span></label><span
+																		class="ecommerce-input-wrapper"><input
+																			type="text" class="input-text "
+																			name="billing_company" id="billing_company"
+																			placeholder="" value=""
+																			autocomplete="organization"></span></p> -->
+																<p class="form-row form-row-wide address-field update_totals_on_change validate-required"
+																	id="billing_country_field" data-priority="40"><label
+																		for="billing_country" class="">Country /
+																		Region&nbsp;<abbr class="required"
+																			title="required">*</abbr></label><span
+																		class="ecommerce-input-wrapper"><strong>India</strong><input
+																			type="hidden" name="billing_country"
+																			id="billing_country" value="IN"
+																			autocomplete="country"
+																			class="country_to_state"
+																			readonly="readonly"></span></p>
+																<p class="form-row form-row-wide address-field validate-required ecommerce-validated"
+																	id="billing_address_1_field" data-priority="50">
+																	<label for="billing_address_1" class="">Street
+																		address&nbsp;<abbr class="required"
+																			title="required">*</abbr></label><span
+																		class="ecommerce-input-wrapper"><input
+																			type="text" class="input-text "
+																			name="billing_address_1"
+																			id="billing_address_1"
+																			placeholder="House number and street name"
+																			value="" autocomplete="address-line1"
+																			data-placeholder="House number and street name"></span>
+																</p>
+																<p class="form-row form-row-wide address-field"
+																	id="billing_address_2_field" data-priority="60">
+																	<label for="billing_address_2"
+																		class="screen-reader-text">Apartment, suite,
+																		unit,
+																		etc. (optional)&nbsp;<span
+																			class="optional">(optional)</span></label><span
+																		class="ecommerce-input-wrapper"><input
+																			type="text" class="input-text "
+																			name="billing_address_2"
+																			id="billing_address_2"
+																			placeholder="Apartment, suite, unit, etc. (optional)"
+																			value="" autocomplete="address-line2"
+																			data-placeholder="Apartment, suite, unit, etc. (optional)"></span>
+																</p>
+																<p class="form-row form-row-wide address-field validate-required ecommerce-validated"
+																	id="billing_city_field" data-priority="70"
+																	data-o_class="form-row form-row-wide address-field validate-required">
+																	<label for="billing_city" class="">Town /
+																		City&nbsp;<abbr class="required"
+																			title="required">*</abbr></label><span
+																		class="ecommerce-input-wrapper"><input
+																			type="text" class="input-text "
+																			name="billing_city" id="billing_city"
+																			placeholder="" value=""
+																			autocomplete="address-level2"></span></p>
+																<p class="form-row form-row-wide address-field validate-required validate-state ecommerce-validated"
+																	id="billing_state_field" data-priority="80"
+																	data-o_class="form-row form-row-wide address-field validate-required validate-state">
+																	<label for="billing_state" class="">State /
+																		Country&nbsp;<abbr class="required"
+																			title="required">*</abbr></label><span
+																		class="ecommerce-input-wrapper"><select
+																			name="billing_state" id="billing_state"
+																			class="state_select select2-hidden-accessible"
+																			autocomplete="address-level1"
+																			data-placeholder="Select an option…"
+																			data-input-classes="" tabindex="-1"
+																			aria-hidden="true">
+																			<option value="">Select an option…</option>
+																			<!-- <option value="AP">Andhra Pradesh</option>
+																			<option value="AR">Arunachal Pradesh
+																			</option>
+																			<option value="AS">Assam</option>
+																			<option value="BR">Bihar</option>
+																			<option value="CT">Chhattisgarh</option>
+																			<option value="GA">Goa</option>
+																			<option value="GJ">Gujarat</option>
+																			<option value="HR">Haryana</option>
+																			<option value="HP">Himachal Pradesh</option>
+																			<option value="JK">Jammu and Kashmir
+																			</option>
+																			<option value="JH">Jharkhand</option>
+																			<option value="KA">Karnataka</option>
+																			<option value="KL">Kerala</option>
+																			<option value="MP">Madhya Pradesh</option>
+																			<option value="MH">Maharashtra</option>
+																			<option value="MN">Manipur</option>
+																			<option value="ML">Meghalaya</option>
+																			<option value="MZ">Mizoram</option>
+																			<option value="NL">Nagaland</option> -->
+																			<option value="OR">Orissa</option>
+																			<!-- <option value="PB">Punjab</option>
+																			<option value="RJ">Rajasthan</option>
+																			<option value="SK">Sikkim</option>
+																			<option value="TN">Tamil Nadu</option>
+																			<option value="TS">Telangana</option>
+																			<option value="TR">Tripura</option>
+																			<option value="UK">Uttarakhand</option>
+																			<option value="UP">Uttar Pradesh</option>
+																			<option value="WB">West Bengal</option>
+																			<option value="AN">Andaman and Nicobar
+																				Islands
+																			</option>
+																			<option value="CH">Chandigarh</option>
+																			<option value="DN">Dadra and Nagar Haveli
+																			</option>
+																			<option value="DD">Daman and Diu</option>
+																			<option value="DL">Delhi</option>
+																			<option value="LD">Lakshadeep</option>
+																			<option value="PY">Pondicherry (Puducherry)
+																			</option> -->
+																		</select>
+																</p>
+																<p class="form-row form-row-wide address-field validate-required validate-postcode ecommerce-validated"
+																	id="billing_postcode_field" data-priority="90"
+																	data-o_class="form-row form-row-wide address-field validate-required validate-postcode">
+																	<label for="billing_postcode" class="">Postcode /
+																		ZIP&nbsp;<abbr class="required"
+																			title="required">*</abbr></label><span
+																		class="ecommerce-input-wrapper"><input
+																			type="text" class="input-text "
+																			name="billing_postcode"
+																			id="billing_postcode" placeholder=""
+																			value="" autocomplete="postal-code"></span>
+																</p>
+																<p class="form-row form-row-wide validate-required validate-phone ecommerce-validated"
+																	id="billing_phone_field" data-priority="100"><label
+																		for="billing_phone" class="">Phone&nbsp;<abbr
+																			class="required"
+																			title="required">*</abbr></label><span
+																		class="ecommerce-input-wrapper"><input
+																			type="tel" class="input-text "
+																			name="billing_phone" id="billing_phone"
+																			placeholder="" value=""
+																			autocomplete="tel"></span></p>
+															</div>
+
+														</div>
+
+														<div class="ecommerce-account-fields">
+														</div>
+													</div>
+
+													<div class="col-2">
+														<div class="ecommerce-shipping-fields">
+
+															<h3 id="ship-to-different-address">
+																<label
+																	class="ecommerce-form__label ecommerce-form__label-for-checkbox checkbox">
+																	<input id="ship-to-different-address-checkbox"
+																		class="ecommerce-form__input ecommerce-form__input-checkbox input-checkbox"
+																		type="checkbox" name="ship_to_different_address"
+																		value="1"> <span>Ship to a different
+																		address?</span>
+																</label>
+															</h3>
+
+															<div class="shipping_address" style="display: none;">
+
+
+																<div class="ecommerce-shipping-fields__field-wrapper">
+																	<p class="form-row form-row-first validate-required"
+																		id="shipping_first_name_field"
+																		data-priority="10">
+																		<label for="shipping_first_name" class="">First
+																			name&nbsp;<abbr class="required"
+																				title="required">*</abbr></label><span
+																			class="ecommerce-input-wrapper"><input
+																				type="text" class="input-text "
+																				name="shipping_first_name"
+																				id="shipping_first_name" placeholder=""
+																				value=""
+																				autocomplete="given-name"></span>
+																	</p>
+																	<p class="form-row form-row-last validate-required"
+																		id="shipping_last_name_field"
+																		data-priority="20">
+																		<label for="shipping_last_name" class="">Last
+																			name&nbsp;<abbr class="required"
+																				title="required">*</abbr></label><span
+																			class="ecommerce-input-wrapper"><input
+																				type="text" class="input-text "
+																				name="shipping_last_name"
+																				id="shipping_last_name" placeholder=""
+																				value=""
+																				autocomplete="family-name"></span>
+																	</p>
+																	<p class="form-row form-row-wide address-field update_totals_on_change validate-required"
+																		id="shipping_country_field" data-priority="40">
+																		<label for="shipping_country" class="">Country /
+																			Region&nbsp;<abbr class="required"
+																				title="required">*</abbr></label><span
+																			class="ecommerce-input-wrapper"><strong>India</strong><input
+																				type="hidden" name="shipping_country"
+																				id="shipping_country" value="IN"
+																				autocomplete="country"
+																				class="country_to_state"
+																				readonly="readonly"></span></p>
+																	<p class="form-row form-row-wide address-field validate-required"
+																		id="shipping_address_1_field"
+																		data-priority="50">
+																		<label for="shipping_address_1" class="">Street
+																			address&nbsp;<abbr class="required"
+																				title="required">*</abbr></label><span
+																			class="ecommerce-input-wrapper"><input
+																				type="text" class="input-text "
+																				name="shipping_address_1"
+																				id="shipping_address_1"
+																				placeholder="House number and street name"
+																				value="" autocomplete="address-line1"
+																				data-placeholder="House number and street name"></span>
+																	</p>
+																	<p class="form-row form-row-wide address-field"
+																		id="shipping_address_2_field"
+																		data-priority="60">
+																		<label for="shipping_address_2"
+																			class="screen-reader-text">Apartment, suite,
+																			unit, etc. (optional)&nbsp;<span
+																				class="optional">(optional)</span></label><span
+																			class="ecommerce-input-wrapper"><input
+																				type="text" class="input-text "
+																				name="shipping_address_2"
+																				id="shipping_address_2"
+																				placeholder="Apartment, suite, unit, etc. (optional)"
+																				value="" autocomplete="address-line2"
+																				data-placeholder="Apartment, suite, unit, etc. (optional)"></span>
+																	</p>
+																	<p class="form-row form-row-wide address-field validate-required"
+																		id="shipping_city_field" data-priority="70"
+																		data-o_class="form-row form-row-wide address-field validate-required">
+																		<label for="shipping_city" class="">Town /
+																			City&nbsp;<abbr class="required"
+																				title="required">*</abbr></label><span
+																			class="ecommerce-input-wrapper"><input
+																				type="text" class="input-text "
+																				name="shipping_city" id="shipping_city"
+																				placeholder="" value=""
+																				autocomplete="address-level2"></span>
+																	</p>
+																	<p class="form-row form-row-wide address-field validate-required validate-state"
+																		id="shipping_state_field" data-priority="80"
+																		data-o_class="form-row form-row-wide address-field validate-required validate-state">
+																		<label for="shipping_state" class="">State /
+																			Country&nbsp;<abbr class="required"
+																				title="required">*</abbr></label><span
+																			class="ecommerce-input-wrapper"><select
+																				name="shipping_state"
+																				id="shipping_state"
+																				class="state_select select2-hidden-accessible"
+																				autocomplete="address-level1"
+																				data-placeholder="Select an option…"
+																				data-input-classes="" tabindex="-1"
+																				aria-hidden="true">
+																				<option value="">Select an option…
+																				</option>
+																				<!-- <option value="AP">Andhra Pradesh
+																				</option>
+																				<option value="AR">Arunachal Pradesh
+																				</option>
+																				<option value="AS">Assam</option>
+																				<option value="BR">Bihar</option>
+																				<option value="CT">Chhattisgarh</option>
+																				<option value="GA">Goa</option>
+																				<option value="GJ">Gujarat</option>
+																				<option value="HR">Haryana</option>
+																				<option value="HP">Himachal Pradesh
+																				</option>
+																				<option value="JK">Jammu and Kashmir
+																				</option>
+																				<option value="JH">Jharkhand</option>
+																				<option value="KA">Karnataka</option>
+																				<option value="KL">Kerala</option>
+																				<option value="MP">Madhya Pradesh
+																				</option>
+																				<option value="MH">Maharashtra</option>
+																				<option value="MN">Manipur</option>
+																				<option value="ML">Meghalaya</option>
+																				<option value="MZ">Mizoram</option>
+																				<option value="NL">Nagaland</option> -->
+																				<option value="OR">Orissa</option>
+																				<!-- <option value="PB">Punjab</option>
+																				<option value="RJ">Rajasthan</option>
+																				<option value="SK">Sikkim</option>
+																				<option value="TN">Tamil Nadu</option>
+																				<option value="TS">Telangana</option>
+																				<option value="TR">Tripura</option>
+																				<option value="UK">Uttarakhand</option>
+																				<option value="UP">Uttar Pradesh
+																				</option>
+																				<option value="WB">West Bengal</option>
+																				<option value="AN">Andaman and Nicobar
+																					Islands</option>
+																				<option value="CH">Chandigarh</option>
+																				<option value="DN">Dadra and Nagar
+																					Haveli
+																				</option>
+																				<option value="DD">Daman and Diu
+																				</option>
+																				<option value="DL">Delhi</option>
+																				<option value="LD">Lakshadeep</option>
+																				<option value="PY">Pondicherry
+																					(Puducherry)
+																				</option> -->
+																			</select>
+																	</p>
+																	<p class="form-row form-row-wide address-field validate-required validate-postcode"
+																		id="shipping_postcode_field" data-priority="90"
+																		data-o_class="form-row form-row-wide address-field validate-required validate-postcode">
+																		<label for="shipping_postcode" class="">Postcode
+																			/
+																			ZIP&nbsp;<abbr class="required"
+																				title="required">*</abbr></label><span
+																			class="ecommerce-input-wrapper"><input
+																				type="text" class="input-text "
+																				name="shipping_postcode"
+																				id="shipping_postcode" placeholder=""
+																				value=""
+																				autocomplete="postal-code"></span>
+																	</p>
+																</div>
+
+
+															</div>
+
+														</div>
+														<div class="ecommerce-additional-fields">
+
+
+
+															<div class="ecommerce-additional-fields__field-wrapper">
+																<p class="form-row notes" id="order_comments_field"
+																	data-priority=""><label for="order_comments"
+																		class="">Order notes&nbsp;<span
+																			class="optional">(optional)</span></label><span
+																		class="ecommerce-input-wrapper"><textarea
+																			name="order_comments" class="input-text "
+																			id="order_comments"
+																			placeholder="Notes about your order, e.g. special notes for delivery."
+																			rows="2" cols="5"></textarea></span></p>
+															</div>
+
+
+														</div>
+													</div>
+												</div>
+
+
+
+												<div class="ElementHeading">
+													<h2 id="order_review_heading" class="element-title">Your order</h2>
+												</div>
+
+
+												<div id="order_review" class="ecommerce-checkout-review-order">
+													<table class="shop_table ecommerce-checkout-review-order-table">
+														<thead>
+															<tr>
+																<th class="product-name">Product</th>
+																<th class="product-total">Subtotal</th>
+															</tr>
+														</thead>
+														<tbody>
+															{% for order_book in object.books.all %}
+															<tr class="cart_item">
+																<td class="product-name">
+																	{{order_book.Book.book_nm}}&nbsp; <strong
+																		class="product-quantity">×&nbsp;{{order_book.quantity}}</strong>
+																</td>
+																<td class="product-total">
+																	<span class="ecommerce-Price-amount amount"><span
+																			class="ecommerce-Price-currencySymbol">₹</span>{{order_book.get_total_book_price}}0</span>
+																</td>
+															</tr>
+															{%endfor%}
+														</tbody>
+														<tfoot>
+
+															<tr class="cart-subtotal">
+																<th>Subtotal</th>
+																<td><span class="ecommerce-Price-amount amount"><span
+																			class="ecommerce-Price-currencySymbol">₹</span>{{object.get_stotal}}</span>
+																</td>
+															</tr>
+
+
+
+
+															<tr class="ecommerce-shipping-totals shipping">
+																<th>Shipping</th>
+																<td data-title="Shipping">
+																	<ul id="shipping_method"
+																		class="ecommerce-shipping-methods">
+																		<li>
+																			<input type="hidden"
+																				name="shipping_method[0]" data-index="0"
+																				id="shipping_method_0_flat_rate1"
+																				value="flat_rate:1"
+																				class="shipping_method"><label
+																				for="shipping_method_0_flat_rate1"><span
+																					class="ecommerce-Price-amount amount"><span
+																						class="ecommerce-Price-currencySymbol">₹</span>40.00</span></label>
+																		</li>
+																	</ul>
+
+
+																</td>
+															</tr>
+
+
+
+
+
+
+															<tr class="order-total">
+																<th>Total</th>
+																<td><strong><span
+																			class="ecommerce-Price-amount amount"><span
+																				class="ecommerce-Price-currencySymbol">₹</span>{{object.get_total}}</span></strong>
+																</td>
+															</tr>
+
+
+														</tfoot>
+													</table>
+
+
+													<div id="payment" class="ecommerce-checkout-payment"
+														style="position: static; zoom: 1;">
+														<ul class="wc_payment_methods payment_methods methods">
+															<li class="wc_payment_method payment_method_cod">
+																<input id="payment_method_cod" type="radio"
+																	class="input-radio" name="payment_method"
+																	value="cod" checked="checked"
+																	data-order_button_text="" style="display: none;">
+
+																<label for="payment_method_cod">
+																	Cash on delivery </label>
+																<div class="payment_box payment_method_cod">
+																	<p>Pay with cash upon delivery.</p>
+																</div>
+															</li>
+														</ul>
+														<div class="form-row place-order">
+															<noscript>
+																Since your browser does not support JavaScript, or it is
+																disabled, please ensure you click the <em>Update
+																	Totals</em>
+																button before placing your order. You may be charged
+																more
+																than the amount stated above if you fail to do so.
+																<br /><button type="submit" class="button alt"
+																	name="ecommerce_checkout_update_totals"
+																	value="Update totals">Update totals</button>
+															</noscript>
+
+															<div class="ecommerce-terms-and-conditions-wrapper">
+																<div class="ecommerce-privacy-policy-text"></div>
+															</div>
+
+
+															<button type="submit" class="button alt"
+																name="ecommerce_checkout_place_order" id="place_order"
+																value="Place order" data-value="Place order">Place
+																order</button>
+
+															<input type="hidden" id="ecommerce-process-checkout-nonce"
+																name="ecommerce-process-checkout-nonce"
+																value="507ab5b7e3"><input type="hidden"
+																name="_wp_http_referer"
+																value="/wordpress/?wc-ajax=update_order_review">
+														</div>
+													</div>
+
+												</div>
+
+
+											</form>
+
+										</div><!-- end col-sm-12 -->
+									</div><!-- end row -->
+								</div><!-- end container -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- end post -->
+		</div><!-- end MAIN-CONTENT -->
+		<script type="text/javascript">
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		</script>
+
+		<script type="text/javascript"
+			src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/jquery-blockui/jquery.blockUI.min.js"></script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			var wc_add_to_cart_params = { "ajax_url": "\/wordpress\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/wordpress\/?wc-ajax=%%endpoint%%", "i18n_view_cart": "View cart", "cart_url": "http:\/\/localhost\/wordpress\/cart\/", "is_cart": "", "cart_redirect_after_add": "no" };
+/* ]]> */
+		</script>
+		<script type="text/javascript"
+			src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/frontend/add-to-cart.min.js"></script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			var pwsL10n = { "unknown": "Password strength unknown", "short": "Very weak", "bad": "Weak", "good": "Medium", "strong": "Strong", "mismatch": "Mismatch" };
+/* ]]> */
+		</script>
+		<script type="text/javascript"
+			src="https://c0.wp.com/c/5.4.2/wp-admin/js/password-strength-meter.min.js"></script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			var wc_password_strength_meter_params = { "min_password_strength": "3", "stop_checkout": "", "i18n_password_error": "Please enter a stronger password.", "i18n_password_hint": "Hint: The password should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! \" ? $ % ^ & )." };
+/* ]]> */
+		</script>
+		<script type="text/javascript"
+			src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/frontend/password-strength-meter.min.js"></script>
+		<script type="text/javascript"
+			src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/js-cookie/js.cookie.min.js"></script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			var woocommerce_params = { "ajax_url": "\/wordpress\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/wordpress\/?wc-ajax=%%endpoint%%" };
+/* ]]> */
+		</script>
+		<script type="text/javascript"
+			src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/frontend/woocommerce.min.js"></script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			var wc_country_select_params = { "countries": "{\"IN\":{\"AP\":\"Andhra Pradesh\",\"AR\":\"Arunachal Pradesh\",\"AS\":\"Assam\",\"BR\":\"Bihar\",\"CT\":\"Chhattisgarh\",\"GA\":\"Goa\",\"GJ\":\"Gujarat\",\"HR\":\"Haryana\",\"HP\":\"Himachal Pradesh\",\"JK\":\"Jammu and Kashmir\",\"JH\":\"Jharkhand\",\"KA\":\"Karnataka\",\"KL\":\"Kerala\",\"MP\":\"Madhya Pradesh\",\"MH\":\"Maharashtra\",\"MN\":\"Manipur\",\"ML\":\"Meghalaya\",\"MZ\":\"Mizoram\",\"NL\":\"Nagaland\",\"OR\":\"Orissa\",\"PB\":\"Punjab\",\"RJ\":\"Rajasthan\",\"SK\":\"Sikkim\",\"TN\":\"Tamil Nadu\",\"TS\":\"Telangana\",\"TR\":\"Tripura\",\"UK\":\"Uttarakhand\",\"UP\":\"Uttar Pradesh\",\"WB\":\"West Bengal\",\"AN\":\"Andaman and Nicobar Islands\",\"CH\":\"Chandigarh\",\"DN\":\"Dadra and Nagar Haveli\",\"DD\":\"Daman and Diu\",\"DL\":\"Delhi\",\"LD\":\"Lakshadeep\",\"PY\":\"Pondicherry (Puducherry)\"}}", "i18n_select_state_text": "Select an option\u2026", "i18n_no_matches": "No matches found", "i18n_ajax_error": "Loading failed", "i18n_input_too_short_1": "Please enter 1 or more characters", "i18n_input_too_short_n": "Please enter %qty% or more characters", "i18n_input_too_long_1": "Please delete 1 character", "i18n_input_too_long_n": "Please delete %qty% characters", "i18n_selection_too_long_1": "You can only select 1 item", "i18n_selection_too_long_n": "You can only select %qty% items", "i18n_load_more": "Loading more results\u2026", "i18n_searching": "Searching\u2026" };
+/* ]]> */
+		</script>
+		<script type="text/javascript"
+			src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/frontend/country-select.min.js"></script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			var wc_address_i18n_params = { "locale": "{\"default\":{\"first_name\":{\"label\":\"First name\",\"required\":true,\"class\":[\"form-row-first\"],\"autocomplete\":\"given-name\",\"priority\":10},\"last_name\":{\"label\":\"Last name\",\"required\":true,\"class\":[\"form-row-last\"],\"autocomplete\":\"family-name\",\"priority\":20},\"company\":{\"label\":\"Company name\",\"class\":[\"form-row-wide\"],\"autocomplete\":\"organization\",\"priority\":30,\"required\":false},\"country\":{\"type\":\"country\",\"label\":\"Country \\\/ Region\",\"required\":true,\"class\":[\"form-row-wide\",\"address-field\",\"update_totals_on_change\"],\"autocomplete\":\"country\",\"priority\":40},\"address_1\":{\"label\":\"Street address\",\"placeholder\":\"House number and street name\",\"required\":true,\"class\":[\"form-row-wide\",\"address-field\"],\"autocomplete\":\"address-line1\",\"priority\":50},\"address_2\":{\"placeholder\":\"Apartment, suite, unit, etc. (optional)\",\"class\":[\"form-row-wide\",\"address-field\"],\"autocomplete\":\"address-line2\",\"priority\":60,\"required\":false},\"city\":{\"label\":\"Town \\\/ City\",\"required\":true,\"class\":[\"form-row-wide\",\"address-field\"],\"autocomplete\":\"address-level2\",\"priority\":70},\"state\":{\"type\":\"state\",\"label\":\"State \\\/ County\",\"required\":true,\"class\":[\"form-row-wide\",\"address-field\"],\"validate\":[\"state\"],\"autocomplete\":\"address-level1\",\"priority\":80},\"postcode\":{\"label\":\"Postcode \\\/ ZIP\",\"required\":true,\"class\":[\"form-row-wide\",\"address-field\"],\"validate\":[\"postcode\"],\"autocomplete\":\"postal-code\",\"priority\":90}},\"IN\":{\"first_name\":{\"label\":\"First name\",\"required\":true,\"class\":[\"form-row-first\"],\"autocomplete\":\"given-name\",\"priority\":10},\"last_name\":{\"label\":\"Last name\",\"required\":true,\"class\":[\"form-row-last\"],\"autocomplete\":\"family-name\",\"priority\":20},\"company\":{\"label\":\"Company name\",\"class\":[\"form-row-wide\"],\"autocomplete\":\"organization\",\"priority\":30,\"required\":false},\"country\":{\"type\":\"country\",\"label\":\"Country \\\/ Region\",\"required\":true,\"class\":[\"form-row-wide\",\"address-field\",\"update_totals_on_change\"],\"autocomplete\":\"country\",\"priority\":40},\"address_1\":{\"label\":\"Street address\",\"placeholder\":\"House number and street name\",\"required\":true,\"class\":[\"form-row-wide\",\"address-field\"],\"autocomplete\":\"address-line1\",\"priority\":50},\"address_2\":{\"placeholder\":\"Apartment, suite, unit, etc. (optional)\",\"class\":[\"form-row-wide\",\"address-field\"],\"autocomplete\":\"address-line2\",\"priority\":60,\"required\":false},\"city\":{\"label\":\"Town \\\/ City\",\"required\":true,\"class\":[\"form-row-wide\",\"address-field\"],\"autocomplete\":\"address-level2\",\"priority\":70},\"state\":{\"type\":\"state\",\"label\":\"State \\\/ County\",\"required\":true,\"class\":[\"form-row-wide\",\"address-field\"],\"validate\":[\"state\"],\"autocomplete\":\"address-level1\",\"priority\":80},\"postcode\":{\"label\":\"Postcode \\\/ ZIP\",\"required\":true,\"class\":[\"form-row-wide\",\"address-field\"],\"validate\":[\"postcode\"],\"autocomplete\":\"postal-code\",\"priority\":90}}}", "locale_fields": "{\"address_1\":\"#billing_address_1_field, #shipping_address_1_field\",\"address_2\":\"#billing_address_2_field, #shipping_address_2_field\",\"state\":\"#billing_state_field, #shipping_state_field, #calc_shipping_state_field\",\"postcode\":\"#billing_postcode_field, #shipping_postcode_field, #calc_shipping_postcode_field\",\"city\":\"#billing_city_field, #shipping_city_field, #calc_shipping_city_field\"}", "i18n_required_text": "required", "i18n_optional_text": "optional" };
+/* ]]> */
+		</script>
+		<script type="text/javascript"
+			src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/frontend/address-i18n.min.js"></script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			var wc_checkout_params = { "ajax_url": "\/wordpress\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/wordpress\/?wc-ajax=%%endpoint%%", "update_order_review_nonce": "a244d840b8", "apply_coupon_nonce": "851eb0b738", "remove_coupon_nonce": "574b205acc", "option_guest_checkout": "no", "checkout_url": "\/wordpress\/?wc-ajax=checkout", "is_checkout": "1", "debug_mode": "", "i18n_checkout_error": "Error processing checkout. Please try again." };
+/* ]]> */
+		</script>
+		<script type="text/javascript"
+			src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/frontend/checkout.min.js"></script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			var wc_cart_fragments_params = { "ajax_url": "\/wordpress\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/wordpress\/?wc-ajax=%%endpoint%%", "cart_hash_key": "wc_cart_hash_caa567d77a373f0283cff89c70bd16ae", "fragment_name": "wc_fragments_caa567d77a373f0283cff89c70bd16ae", "request_timeout": "5000" };
+/* ]]> */
+		</script>
+		<script type="text/javascript"
+			src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/frontend/cart-fragments.min.js"></script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			var mailchimp_public_data = { "site_url": "http:\/\/localhost\/wordpress", "ajax_url": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "language": "en" };
+/* ]]> */
+		</script>
+
+		<script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/imagesloaded.min.js"></script>
+		<script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/hoverIntent.min.js"></script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			var odrin = { "ajaxurl": "http:\/\/localhost\/wordpress\/wp-admin\/admin-ajax.php", "nonce": "77faaae28e", "month": "Month", "months": "Months", "day": "Day", "days": "Days", "showChapters": "Show Chapters", "hideChapters": "Hide Chapters", "loading": "Loading" };
+/* ]]> */
+		</script>
+		<script type="text/javascript" src="js/scripts.js?ver=1.0"></script>
+		<script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/wp-embed.min.js"></script>
+
+		<div id="sp-installed"></div>
+</body>
+{% endblock content %}

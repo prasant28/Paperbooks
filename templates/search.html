@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+{% load cart_template_tag %}
+{% load static %}
+{% block head %}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Search – PaperBooks</title>
+    <link rel="stylesheet" id="ecommerce-layout-css" href="{% static 'css/ecommerce-layout.css' %}" type="text/css"
+        media="all">
+    <link rel="stylesheet" id="ecommerce-general-css" href="{% static 'css/ecommerce.css' %}" type="text/css"
+        media="all">
+    <link rel="stylesheet" id="fontawesome-css" href="{% static 'css/font-awesome.min.css' %}" type="text/css"
+        media="all">
+    <link rel="stylesheet" id="odrin_master-css-css" href="{% static 'css/master.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" id="odrin_fonts-css"
+        href="https://fonts.googleapis.com/css?family=Muli:200,300,regular,500,600,700,800,900,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic%7CCinzel+Decorative:regular,700,900%7CGentium+Basic:regular,italic,700,700italic&amp;subset=cyrillic,cyrillic-ext"
+        type="text/css" media="all">
+    <style type="text/css">
+        body {
+            font-family: Muli;
+            font-style: normal;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .fw-table .heading-row,
+        .fw-package .fw-heading-row,
+        .special-first-letter>p:first-of-type:first-letter,
+        .special-heading-letter:first-letter,
+        .ecommerce .price del,
+        .ecommerce .price>span,
+        .font-heading {
+            font-family: Cinzel Decorative;
+            font-style: normal;
+        }
+    </style>
+</head>
+{% endblock head %}
+{% block content %}
+
+<body class="ecommerce ecommerce-page" data-gr-c-s-loaded="true">
+    <!-- cart -->
+    <a class="cart-contents-box" href="/cart" title="View your shopping cart">
+        <i class="fa fa-shopping-basket"></i>Cart<span id="cart-contents-count">
+            ({{request.user|cart_item_count}})</span>
+    </a>
+    <!-- end cart -->
+    <div class="MAIN-CONTENT">
+        <!-- search heading -->
+        <div class="ProductsHeader" style="padding-top: 50px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="SpecialHeading mb-40">
+                            <h1
+                                class="special-title special-heading-letter woocommerce-products-header__title page-title">
+                                Search Result for: {{query}} </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end search heading -->
+        <div class="container  mb-100">
+            <div class="row">
+                <div class="col-sm-12">
+                    <nav class="ecommerce-breadcrumb"><a href="/">Home</a>&nbsp;/&nbsp;Search
+                    </nav>
+                    <div class="col-sm-12 col-md-8">
+                        <!-- sort by -->
+                        <form class="ecommerce-ordering" method="get">
+                            <select name="orderby" class="orderby" aria-label="Shop order" style="appearance: auto;">
+                                <option value="popularity" selected="selected">Sort by popularity</option>
+                                <option value="rating">Sort by average rating</option>
+                                <option value="date">Sort by latest</option>
+                                <option value="price">Sort by price: low to high</option>
+                                <option value="price-desc">Sort by price: high to low</option>
+                            </select>
+                            <input type="hidden" name="paged" value="1">
+                        </form>
+                        <!-- end sort by -->
+                        <p class="ecommerce-result-count">
+                            Showing 1–12 of 81 results</p>
+                        <!-- book search -->
+                        <ul class="products columns-3">
+                            <h3>Books :</h3>
+                            {% for book in books %}
+                            <li class="product">
+                                <a href="{{book.get_absolute_url}}" class="ecommerce-LoopProduct-link">
+                                    <div class="loopProduct-image-wrap">
+                                        <div class="loopProduct-shadow"></div><img width="376" height="500"
+                                            src="../img/{{book.book_image}}"
+                                            class="attachment-odrin_medium_soft size-odrin_medium_soft" alt=""
+                                            data-attachment-id="772" data-permalink="#">
+                                    </div>
+                                    <h2 class="ecommerce-loop-product__title">{{book.book_nm}}</h2>
+                                    <span class="price"><span class="ecommerce-Price-amount amount"><span
+                                                class="ecommerce-Price-currencySymbol">₹</span>{{book.book_price}}</span></span>
+                                </a><a href="#" data-quantity="1"
+                                    class="special-link product_type_simple ajax_add_to_cart"
+                                    data-product_id="{{book.id}}" data-product_sku=""
+                                    aria-label="Add “{{book.book_nm}}” to your cart" rel="nofollow">Add to cart</a></li>
+                            {% endfor %}
+                        </ul>
+                        <!-- end book search -->
+                        <!-- post search -->
+                        <h3>Blogs :</h3>
+                        <div class="EventsStylingPosts is-matchheight-group c-elements-cols-3 mb-40">
+                            {% for post in posts %}
+                            <div class="ContentElement pos-r" style="height: 308px;">
+
+                                <a href="{{post.get_absolute_url}}">
+                                    <div class="c-element-content-wrapper section-light">
+                                        <div class="bg-image" data-bg-image="../img/{{post.post_image}}"
+                                            style="background-image: url(&quot;../img/{{post.post_image}}&amp;ssl=1&quot;);">
+                                        </div>
+                                        <div class="overlay-dark"></div>
+                                        <div class="c-element-date-wrapper pos-r">
+                                            <span class="c-element-date-month ">{{post.post_date}}</span>
+                                        </div>
+                                        <div class="c-element-content pos-r">
+                                            <h4 class="c-element-title">{{post.post_title}}</h4>
+                                            <div class="c-element-category special-subtitle-type-2">
+                                                {{post.post_category}}</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <!-- end post search -->
+                        <!-- pagination -->
+                        <nav class="ecommerce-pagination">
+                            <span class="step-links">
+
+                                {% if books.has_previous %}
+                                <a href="?page=1">← FIRST </a>|
+                                <a href="?page={{ books.previous_page_number }}"> PREVIOUS </a>
+                                {% endif %}
+
+                                <span class="current mx-2 ">
+                                    Page {{ books.number }} of {{ books.paginator.num_pages }}.
+                                </span>
+
+                                {% if books.has_next %}
+                                <a href="?page={{ books.next_page_number }}"> NEXT </a>|
+                                <a href="?page={{ books.paginator.num_pages }}"> LAST →</a>
+                                {% endif %}
+                            </span>
+                        </nav>
+                        <!-- end pagination -->
+                    </div>
+                    <!-- side nav -->
+                    <div
+                        class="SidebarShop col-lg-3 col-lg-offset-1 col-md-4 col-md-offset-0 col-sm-12 col-sm-offset-0">
+                        <!-- search bar -->
+                        <div class="widget clearfix ecommerce widget_product_search">
+                            <form role="search" method="get" class="ecommerce-product-search" action="">
+                                <label class="screen-reader-text" for="ecommerce-product-search-field-0">Search
+                                    for:</label>
+                                <input type="search" id="ecommerce-product-search-field-0" class="search-field"
+                                    placeholder="Search …" value="" name="s_h">
+                                <button type="submit" value="Search">Search</button>
+                            </form>
+                        </div>
+                        <!-- end search bar -->
+                        <form action="" method="GET">
+                            <!-- publication -->
+                            <div class="widget clearfix ecommerce widget_product_categories">
+                                <h3 class="widget-title dash-left">Publications</h3>
+                                <select name="publication" style="min-width: -webkit-fill-available; appearance: auto; "
+                                    onchange='this.form.submit()'>
+                                    <option disabled="true" selected>Select Publication</option>
+                                    <option value="Alok Publication">Alok Publication</option>
+                                    <option value="BK Publication">BK Publication</option>
+                                    <option value="EM Publication">EM Publication</option>
+                                    <option value="Khanna Publication">Khanna Publication</option>
+                                </select>
+                            </div>
+                            <!-- end publication -->
+                            <!-- branch -->
+                            <div class="widget clearfix ecommerce widget_product_categories">
+                                <h3 class="widget-title dash-left">Branch</h3>
+                                <select name="branch" style="min-width: -webkit-fill-available; appearance:  auto;"
+                                    onchange='this.form.submit()'>
+                                    <option disabled="true" selected>Select Branch</option>
+                                    <option value="ALL">ALL</option>
+                                    <option value="CIVIL">CIVIL</option>
+                                    <option value="CSE">CSE</option>
+                                    <option value="ECE">ECE</option>
+                                    <option value="EE">EE</option>
+                                    <option value="EEE">EEE</option>
+                                    <option value="MECH">MECH</option>
+                                </select>
+                            </div>
+                            <!-- end branch -->
+                            <!-- tags -->
+                            <div class="widget clearfix widget_tag_cloud">
+                                <h3 class="widget-title dash-left">Blog Categories</h3>
+                                <select name="category" style="min-width: -webkit-fill-available; appearance: auto;"
+                                    onchange='this.form.submit()'>
+                                    <option disabled="true" selected>Select Category</option>
+                                    <option value="Education">Education</option>
+                                </select>
+                            </div>
+                            <!-- end tags -->
+                        </form>
+                        <!-- price filter -->
+                        <div class="widget clearfix ecommerce widget_price_filter">
+                            <h3 class="widget-title  dash-left">Filter by price</h3>
+                            <form method="get" action="">
+                                <div class="price_slider_wrapper">
+                                    <div class="price_slider_amount" data-step="10">
+                                        <input type="text" id="min_price" name="min_price" value="0" data-min="0"
+                                            placeholder="Min price">
+                                        <input type="text" id="max_price" name="max_price" value="330" data-max="330"
+                                            placeholder="Max price">
+                                        <button type="submit" class="button">Filter</button>
+                                        <div class="price_label">
+                                            Price: <span class="from">₹0</span> — <span class="to">₹330</span>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- end price filter -->
+                    </div>
+                    <!-- end side nav -->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock content %}

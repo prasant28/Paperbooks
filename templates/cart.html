@@ -1,0 +1,311 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+
+<head>
+	<title>Cart – PaperBook</title>
+	<link rel="stylesheet" href="{% static 'css/ecommerce-layout.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/ecommerce-smallscreen.css' %}" type="text/css"
+		media="only screen and (max-width: 768px)">
+	<link rel="stylesheet" href="{% static 'css/ecommerce.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css" media="all">
+	<link rel="stylesheet" href="{% static 'css/master.css' %}" type="text/css" media="all">
+	<script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="https://c0.wp.com/c/5.4.2/wp-includes/js/jquery/jquery-migrate.min.js"></script>
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Muli:200,300,regular,500,600,700,800,900,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic%7CCinzel+Decorative:regular,700,900%7CGentium+Basic:regular,italic,700,700italic&amp;subset=cyrillic,cyrillic-ext"
+		type="text/css" media="all">
+	<style type="text/css">
+		body {
+			font-family: Muli;
+			font-style: normal;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		.fw-table .heading-row,
+		.fw-package .fw-heading-row,
+		.special-first-letter>p:first-of-type:first-letter,
+		.special-heading-letter:first-letter,
+		.ecommerce .price del,
+		.ecommerce .price>span,
+		.font-heading {
+			font-family: Cinzel Decorative;
+			font-style: normal;
+		}
+
+		label {
+			font-family: Gentium Book Basic;
+			font-style: normal;
+		}
+	</style>
+</head>
+{% endblock head %}
+{% block content %}
+
+<body data-gr-c-s-loaded="true">
+	<div style="padding-top:50px;"></div>
+	<div class="MAIN-CONTENT">
+		<!-- page heading -->
+		<div class="PageHeader container text-center">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="SpecialHeading">
+						<h1 class="special-title special-heading-letter">My Cart</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end page heading -->
+		<div class="container mt-10 mb-100">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="ecommerce">
+						<div class="ecommerce-notices-wrapper"></div>
+						<div class="container mb-100">
+							<div class="row">
+								<div class="col-sm-12">
+									<form action="" method="post">
+										{% csrf_token %}
+										<table class="shop_table shop_table_responsive cart" cellspacing="0">
+											<thead>
+												<tr>
+													<th class="product-remove">&nbsp;</th>
+													<th class="product-thumbnail">&nbsp;</th>
+													<th class="product-name">Product</th>
+													<th class="product-price">Price</th>
+													<th class="product-quantity">Quantity</th>
+													<th class="product-subtotal">Subtotal</th>
+												</tr>
+											</thead>
+											<!-- cart item -->
+											<tbody>
+												{% for order_book in object.books.all %}
+												<tr class="ecommerce-cart-form__cart-item cart_item">
+													<td class="product-remove">
+														<a href="{% url 'core:remove-from-cart' order_book.Book.slug%}"
+															class="remove" aria-label="Remove this item">×</a> </td>
+													<td class="product-thumbnail">
+														<a href="{% url 'core:book' order_book.Book.slug %}"><img
+																width="376" height="400"
+																src="/img/{{order_book.Book.book_image}}"
+																class="attachment-ecommerce_thumbnail size-ecommerce_thumbnail"
+																alt="" data-attachment-id="{{book.pk}}"></a>
+													</td>
+													<td class="product-name" data-title="Product">
+														<a
+															href="{% url 'core:book' order_book.Book.slug %}">{{order_book.Book.book_nm}}</a>
+													</td>
+
+													<td class="product-price" data-title="Price">
+														<span class="ecommerce-Price-amount amount"><span
+																class="ecommerce-Price-currencySymbol">₹</span>{{order_book.Book.book_price}}0</span>
+													</td>
+													<td class="product-price" data-title="Quantity"
+														style="text-align: center;">
+														<a
+															href="{% url 'core:remove-single-item-from-cart' order_book.Book.slug %}"><i
+																class='fas fa-minus'></i></a>
+														<span class="ecommerce-Price-amount amount"
+															style="margin: 8px;">{{order_book.quantity}}</span>
+														<a href="{% url 'core:add-to-cart' order_book.Book.slug %}"><i
+																class='fas fa-plus'></i></a>
+													</td>
+													<!-- subtotal -->
+													<td class="product-subtotal" data-title="Subtotal">
+														<span class="ecommerce-Price-amount amount"><span
+																class="ecommerce-Price-currencySymbol">₹</span>{{order_book.get_total_book_price}}0</span>
+													</td>
+													<!-- end subtotal -->
+												</tr>
+												{% empty %}
+												<h3>Your cart is empty</h3>
+												{% endfor %}
+												<tr>
+													<td colspan="6" class="actions">
+														<div class="coupon">
+															<label for="coupon_code">Coupon:</label> <input type="text"
+																name="coupon_code" class="input-text" id="coupon_code"
+																value="" placeholder="Coupon code">
+															<button type="submit" class="button" name="apply_coupon"
+																value="Apply coupon">Apply coupon</button>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+											<!-- end cart item -->
+										</table>
+									</form>
+									<div class="cart-collaterals">
+										<div class="cart_totals hidden-xs" style="float: left">
+											<img src="{% static 'img/12125.svg' %}" alt="12125">
+										</div>
+										<div class="cart_totals ">
+											<div class="ElementHeading">
+												<h2 class="element-title">Cart totals</h2>
+											</div>
+											<!-- final total -->
+											<table cellspacing="0" class="shop_table shop_table_responsive">
+												<tbody>
+													<tr class="cart-subtotal">
+														<th>Subtotal</th>
+														<td data-title="Subtotal"><span
+																class="ecommerce-Price-amount amount"><span
+																	class="ecommerce-Price-currencySymbol">₹</span>{{object.get_stotal}}</span>
+														</td>
+													</tr>
+													<tr class="ecommerce-shipping-totals shipping">
+														<th>Shipping</th>
+														<td data-title="Shipping">
+															<span class="ecommerce-Price-amount amount"><span
+																	class="ecommerce-Price-currencySymbol">₹</span>40</span>
+															<!-- Enter your address to view shipping options.
+															<form class="ecommerce-shipping-calculator"
+																action="http://localhost/wordpress/cart/" method="post">
+																<a href="#" class="shipping-calculator-button">Calculate
+																	shipping</a>
+																<section class="shipping-calculator-form"
+																	style="display: none;">
+																	<p class="form-row form-row-wide"
+																		id="calc_shipping_country_field">
+																		<select name="calc_shipping_country"
+																			id="calc_shipping_country"
+																			class="country_to_state country_select select2-hidden-accessible"
+																			rel="calc_shipping_state" tabindex="-1"
+																			aria-hidden="true">
+																			<option value="">Select a country /
+																				region…</option>
+																			<option value="IN">India</option>
+																		</select><span
+																			class="select2 select2-container select2-container--default"
+																			dir="ltr" style="width: 100%;"><span
+																				class="selection"><span
+																					class="select2-selection select2-selection--single"
+																					aria-haspopup="true"
+																					aria-expanded="false" tabindex="0"
+																					aria-labelledby="select2-calc_shipping_country-container"
+																					role="combobox"><span
+																						class="select2-selection__rendered"
+																						id="select2-calc_shipping_country-container"
+																						role="textbox"
+																						aria-readonly="true"><span
+																							class="select2-selection__placeholder"></span></span><span
+																						class="select2-selection__arrow"
+																						role="presentation"><b
+																							role="presentation"></b></span></span></span><span
+																				class="dropdown-wrapper"
+																				aria-hidden="true"></span></span>
+																	</p>
+																	<p class="form-row form-row-wide"
+																		id="calc_shipping_state_field">
+																		<input type="text" class="input-text" value=""
+																			placeholder="State / County"
+																			name="calc_shipping_state"
+																			id="calc_shipping_state">
+																	</p>
+																	<p class="form-row form-row-wide"
+																		id="calc_shipping_city_field">
+																		<input type="text" class="input-text" value=""
+																			placeholder="City" name="calc_shipping_city"
+																			id="calc_shipping_city">
+																	</p>
+																	<p class="form-row form-row-wide"
+																		id="calc_shipping_postcode_field">
+																		<input type="text" class="input-text" value=""
+																			placeholder="Postcode / ZIP"
+																			name="calc_shipping_postcode"
+																			id="calc_shipping_postcode">
+																	</p>
+																	<p><button type="submit" name="calc_shipping"
+																			value="1" class="button">Update</button>
+																	</p>
+																	<input type="hidden"
+																		id="ecommerce-shipping-calculator-nonce"
+																		name="ecommerce-shipping-calculator-nonce"
+																		value="18acc72673"><input type="hidden"
+																		name="_wp_http_referer"
+																		value="/wordpress/cart/">
+																</section>
+															</form> -->
+														</td>
+													</tr>
+													<tr class="order-total">
+														<th>Total</th>
+														<td data-title="Total"><strong><span
+																	class="ecommerce-Price-amount amount"><span
+																		class="ecommerce-Price-currencySymbol">₹</span>{{object.get_total}}</span></strong>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+											<!-- end final total -->
+											{% if object.books.all %}
+											<div class="wc-proceed-to-checkout">
+												<a href="/bookshelf" class="checkout-button button alt wc-forward"
+													style="margin-left: 10px; margin-bottom: 10px;">
+													Continue Shopping</a>
+												<a href="/checkout" class="checkout-button button alt wc-forward"
+													style="margin-left: 50px; margin-bottom: 10px;">
+													Proceed to checkout</a>
+											</div>
+											{% else %}
+											<div class="wc-proceed-to-checkout">
+												<a href="/bookshelf" class="checkout-button button alt wc-forward"
+													style="margin-left: 10px; margin-bottom: 10px;">
+													Go To Bookshelf</a>
+											</div>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var c = document.body.className;
+		c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+		document.body.className = c;
+	</script>
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var wpcf7 = { "apiSettings": { "root": "http:\/\/localhost\/wordpress\/wp-json\/contact-form-7\/v1", "namespace": "contact-form-7\/v1" } };
+/* ]]> */
+	</script>
+	<script type="text/javascript"
+		src="http://localhost/wordpress/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=5.1.9"></script>
+	<script type="text/javascript"
+		src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/jquery-blockui/jquery.blockUI.min.js"></script>
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var wc_add_to_cart_params = { "ajax_url": "\/wordpress\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/wordpress\/?wc-ajax=%%endpoint%%", "i18n_view_cart": "View cart", "cart_url": "http:\/\/localhost\/wordpress\/cart\/", "is_cart": "1", "cart_redirect_after_add": "no" };
+/* ]]> */
+	</script>
+	<script type="text/javascript"
+		src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/frontend/add-to-cart.min.js"></script>
+	<script type="text/javascript"
+		src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/js-cookie/js.cookie.min.js"></script>
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var woocommerce_params = { "ajax_url": "\/wordpress\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/wordpress\/?wc-ajax=%%endpoint%%" };
+/* ]]> */
+	</script>
+	<script type="text/javascript"
+		src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/frontend/woocommerce.min.js"></script>
+	<script type="text/javascript"
+		src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/frontend/country-select.min.js"></script>
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var wc_cart_params = { "ajax_url": "\/wordpress\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/wordpress\/?wc-ajax=%%endpoint%%", "update_shipping_method_nonce": "f8b3e89967", "apply_coupon_nonce": "851eb0b738", "remove_coupon_nonce": "574b205acc" };
+/* ]]> */
+	</script>
+	<script type="text/javascript" src="https://c0.wp.com/p/woocommerce/4.2.2/assets/js/frontend/cart.min.js"></script>
+</body>
+{% endblock content %}

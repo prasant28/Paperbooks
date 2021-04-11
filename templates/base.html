@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+
+{% block head %}
+<script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+{% endblock head %}
+
+
+
+<body>
+    {% include "header.html" %}
+
+    {% block content  %}
+    {% endblock content %}
+    {% include "footer.html" %}
+    <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+</body>
+<div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="ecommerce-message ecommerce-message--info ecommerce-Message ecommerce-Message--info ecommerce-info"
+        role="alert">
+        <script>alert("{{ message }}")</script>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
+</html>
