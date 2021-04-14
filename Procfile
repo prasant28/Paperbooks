@@ -1,1 +1,1 @@
-web: gunicorn PaperBooks.wsgi:application --log-file -
+web: gunicorn paperbooks.wsgi:application --log-file -
