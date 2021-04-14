@@ -1,4 +1,5 @@
 import os
+import django_heroku
 
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
@@ -135,3 +136,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'popoyjana@gmail.com'
 EMAIL_HOST_PASSWORD = 'Popoyjana@24'
 DEFAULT_FROM_EMAIL = 'PaperBooks Team <noreply@example.com>'
+
+django_heroku.settings(locals())
