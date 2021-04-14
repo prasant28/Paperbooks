@@ -65,7 +65,7 @@ python-editor==1.0.4
 python-engineio==3.13.0
 python-status==1.0.1
 python3-openid==3.1.0
-pywin32==300
+pywin32==228
 requests==2.24.0
 requests-oauthlib==1.2.0
 sqlparse==0.2.4
