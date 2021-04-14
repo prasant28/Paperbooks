@@ -15,7 +15,7 @@ cachetools==4.2.1
 certifi==2019.3.9
 chardet==3.0.4
 distlib==0.3.1
-Django==2.2.1
+Django==2.2.8
 django-allauth==0.39.1
 django-countries==5.3.3
 django-crispy-forms==1.7.2
@@ -56,6 +56,8 @@ oauthlib==3.0.1
 pep8==1.7.1
 Pillow==6.2.2
 psycopg2-binary==2.8.6
+pycodestyle==2.5.0
+pytz==2018.5
 PyJWT==2.0.1
 pylint==2.5.3
 pyOpenSSL==20.0.1
@@ -65,7 +67,6 @@ python-editor==1.0.4
 python-engineio==3.13.0
 python-status==1.0.1
 python3-openid==3.1.0
-pywin32==228
 requests==2.24.0
 requests-oauthlib==1.2.0
 sqlparse==0.2.4
