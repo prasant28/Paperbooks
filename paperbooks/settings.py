@@ -63,6 +63,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+django_heroku.settings(locals())
 MEDIA_URL = '/img/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -136,5 +137,3 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'popoyjana@gmail.com'
 EMAIL_HOST_PASSWORD = 'Popoyjana@24'
 DEFAULT_FROM_EMAIL = 'PaperBooks Team <noreply@example.com>'
-
-django_heroku.settings(locals())
